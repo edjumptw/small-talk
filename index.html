@@ -770,8 +770,10 @@ function speak(aid,text,btn){
   const fail=()=>{ if(failed) return; failed=true; try{ audioEl.pause(); }catch(e){} done(); sayFallback(text,btn); };
   audioEl.onended=done;
   audioEl.onerror=fail;
-  audioEl.playbackRate=rate;
+  /* 順序要緊：指定 src 會把播放速率重設回 1，所以一定要在 src 之後才設定 */
   audioEl.src='audio/'+voiceKey+'/'+aid+'.mp3';
+  audioEl.defaultPlaybackRate=rate;
+  audioEl.playbackRate=rate;
   const p=audioEl.play();
   if(p && p.catch) p.catch(fail);
 }
@@ -835,6 +837,7 @@ voiceSel.onchange=()=>{
 rateSel.onchange=()=>{
   rate=parseFloat(rateSel.value)||1;
   try{ localStorage.setItem(RKEY,String(rate)); }catch(e){}
+  audioEl.defaultPlaybackRate=rate;
   audioEl.playbackRate=rate;
   stopPlaying();
 };
