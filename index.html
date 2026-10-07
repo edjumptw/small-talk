@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>英語練習手冊｜日常社交 + 多益商務</title>
+<meta name="description" content="兩區並存的英語練習手冊：日常社交 Small Talk 100 句、多益商務情境 100 句。可搜尋、可朗讀、可遮蔽自測、可收藏。">
+<style>
+  :root{
+    --bg:#f7f6f3; --card:#ffffff; --ink:#1f1d1a; --ink-soft:#5c5852;
+    --line:#e5e1da; --accent:#8a5a2b; --accent-soft:#f3e9dd; --en:#1a3a5c;
+    --star:#d99b2b; --star-off:#cdc6bb; --shadow:0 1px 3px rgba(31,29,26,.07);
+    --tab2:#2f6f6b; --tab2-soft:#e4efed;
+  }
+  html[data-theme="dark"]{
+    --bg:#171614; --card:#242220; --ink:#ece7df; --ink-soft:#a49c92;
+    --line:#38352f; --accent:#c8955a; --accent-soft:#33291d; --en:#8fc0e8;
+    --star:#e8b45a; --star-off:#57514a; --shadow:0 1px 3px rgba(0,0,0,.4);
+    --tab2:#6fbfb7; --tab2-soft:#1e3230;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Hiragino Sans GB","Microsoft JhengHei",sans-serif;
+    line-height:1.75;font-size:16px;-webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:900px;margin:0 auto;padding:0 20px 90px;}
+
+  header{padding:44px 0 20px;}
+  h1{font-size:30px;margin:0 0 6px;letter-spacing:.5px;}
+  .sub{color:var(--ink-soft);font-size:15px;}
+
+  .tabs{display:flex;gap:8px;padding:18px 0 0;}
+  .tab{
+    flex:1;border:1px solid var(--line);background:var(--card);color:var(--ink-soft);
+    border-radius:12px 12px 0 0;padding:13px 10px;font-size:15.5px;cursor:pointer;
+    font-family:inherit;font-weight:600;transition:.15s;border-bottom:0;
+  }
+  .tab .n{display:block;font-size:12.5px;font-weight:400;opacity:.8;margin-top:1px;}
+  .tab:hover{color:var(--accent);}
+  .tab.on{background:var(--accent-soft);color:var(--accent);border-color:var(--accent);}
+  body[data-tab="toeic"] .tab.on{background:var(--tab2-soft);color:var(--tab2);border-color:var(--tab2);}
+
+  .bar{
+    position:sticky;top:0;z-index:20;
+    background:var(--bg);padding:12px 0 10px;
+    border-top:3px solid var(--accent);border-bottom:1px solid var(--line);margin-bottom:20px;
+  }
+  body[data-tab="toeic"] .bar{border-top-color:var(--tab2);}
+  .row{display:flex;gap:9px;flex-wrap:wrap;align-items:center;}
+  .search{flex:1 1 220px;min-width:170px;position:relative;}
+  .search input{
+    width:100%;padding:11px 38px 11px 14px;border-radius:10px;
+    border:1px solid var(--line);background:var(--card);color:var(--ink);
+    font-size:15px;font-family:inherit;outline:none;
+  }
+  .search input:focus{border-color:var(--accent);}
+  .search .clr{
+    position:absolute;right:8px;top:50%;transform:translateY(-50%);
+    border:0;background:transparent;color:var(--ink-soft);font-size:19px;
+    cursor:pointer;padding:2px 7px;line-height:1;display:none;
+  }
+  .search .clr.on{display:block;}
+  .btn{
+    border:1px solid var(--line);background:var(--card);color:var(--ink);
+    border-radius:9px;padding:9px 13px;font-size:14px;cursor:pointer;
+    font-family:inherit;white-space:nowrap;transition:.15s;
+  }
+  .btn:hover{border-color:var(--accent);color:var(--accent);}
+  .btn.on{background:var(--accent);border-color:var(--accent);color:#fff;}
+  .btn .cnt{opacity:.75;font-size:12.5px;}
+
+  .chips{display:flex;gap:7px;overflow-x:auto;padding:11px 0 2px;scrollbar-width:none;}
+  .chips::-webkit-scrollbar{display:none;}
+  .chip{
+    flex:0 0 auto;border:1px solid var(--line);background:var(--card);color:var(--ink-soft);
+    border-radius:999px;padding:6px 13px;font-size:13.5px;cursor:pointer;font-family:inherit;
+    transition:.15s;
+  }
+  .chip:hover{border-color:var(--accent);color:var(--accent);}
+  .chip.on{background:var(--accent-soft);border-color:var(--accent);color:var(--accent);font-weight:600;}
+  body[data-tab="toeic"] .chip:hover{border-color:var(--tab2);color:var(--tab2);}
+  body[data-tab="toeic"] .chip.on{background:var(--tab2-soft);border-color:var(--tab2);color:var(--tab2);}
+
+  .meta{color:var(--ink-soft);font-size:13.5px;margin:14px 0 4px;}
+
+  h2{
+    font-size:20px;margin:38px 0 4px;padding-left:12px;border-left:5px solid var(--accent);
+    scroll-margin-top:130px;
+  }
+  body[data-tab="toeic"] h2{border-left-color:var(--tab2);}
+  .note{color:var(--ink-soft);font-size:14px;margin:0 0 16px 17px;}
+  .formula{background:var(--accent-soft);border-radius:12px;padding:18px 24px;margin:16px 0 6px;}
+  body[data-tab="toeic"] .formula{background:var(--tab2-soft);}
+  .formula p{margin:6px 0;}
+  .formula b{color:var(--accent);}
+  body[data-tab="toeic"] .formula b{color:var(--tab2);}
+  ul.mine{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 16px 16px 34px;margin:14px 0 0;}
+  ul.mine li{margin:6px 0;}
+
+  .scene{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:6px 22px 14px;margin:16px 0;box-shadow:var(--shadow);}
+  .item{padding:13px 0;border-bottom:1px dashed var(--line);}
+  .item:last-child{border-bottom:0;}
+  .top{display:flex;align-items:flex-start;gap:10px;}
+  .say{
+    flex:0 0 auto;border:1px solid var(--line);background:transparent;color:var(--accent);
+    border-radius:8px;width:32px;height:32px;cursor:pointer;font-size:15px;line-height:1;
+    display:flex;align-items:center;justify-content:center;margin-top:2px;transition:.15s;
+  }
+  body[data-tab="toeic"] .say{color:var(--tab2);}
+  .say:hover{background:var(--accent);color:#fff;border-color:var(--accent);}
+  .say.playing{background:var(--accent);color:#fff;border-color:var(--accent);}
+  .say:disabled{opacity:.35;cursor:default;}
+  .txt{flex:1 1 auto;min-width:0;}
+  .en{color:var(--en);font-size:17px;font-weight:600;letter-spacing:.2px;}
+  .zh{font-size:15px;margin-top:2px;}
+  .tip{color:var(--ink-soft);font-size:13.5px;margin-top:4px;}
+  .tip b{color:var(--accent);font-weight:600;}
+  body[data-tab="toeic"] .tip b{color:var(--tab2);}
+  .star{
+    flex:0 0 auto;border:0;background:transparent;cursor:pointer;font-size:19px;
+    padding:2px 4px;line-height:1;color:var(--star-off);transition:.15s;margin-top:2px;
+  }
+  .star:hover{color:var(--star);}
+  .star.on{color:var(--star);}
+  .badge{
+    display:inline-block;font-size:11.5px;padding:1px 7px;border-radius:5px;
+    background:var(--accent-soft);color:var(--accent);vertical-align:2px;margin-right:6px;font-weight:600;
+  }
+  body[data-tab="toeic"] .badge{background:var(--tab2-soft);color:var(--tab2);}
+
+  /* 自測模式 */
+  .quiz .txt{cursor:pointer;}
+  .quiz .zh, .quiz .tip{filter:blur(6px);user-select:none;transition:filter .18s;}
+  .quiz .item.open .zh, .quiz .item.open .tip{filter:none;}
+  .quiz .txt::after{
+    content:"點一下看答案";display:block;font-size:12.5px;color:var(--ink-soft);
+    margin-top:3px;letter-spacing:.5px;
+  }
+  .quiz .item.open .txt::after{content:"";}
+
+  .bad{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 24px;margin-top:14px;box-shadow:var(--shadow);}
+  .bad h3{margin:0 0 8px;font-size:17px;color:var(--accent);}
+  body[data-tab="toeic"] .bad h3{color:var(--tab2);}
+  .bad p{margin:6px 0;font-size:14.5px;}
+  .bad .en{font-size:15px;}
+
+  .empty{text-align:center;padding:60px 20px;color:var(--ink-soft);}
+  .empty b{display:block;font-size:17px;color:var(--ink);margin-bottom:6px;}
+  mark{background:#ffe9a8;color:inherit;border-radius:3px;padding:0 1px;}
+  html[data-theme="dark"] mark{background:#5a4a1e;color:#f5e6c0;}
+
+  footer{margin-top:56px;padding-top:18px;border-top:1px solid var(--line);color:var(--ink-soft);font-size:13px;}
+
+  @media (max-width:600px){
+    .wrap{padding:0 14px 70px;}
+    h1{font-size:24px;}
+    header{padding:28px 0 14px;}
+    .en{font-size:16px;}
+    .scene{padding:4px 15px 12px;}
+    .tab{font-size:14px;}
+  }
+  @media print{
+    .bar,.say,.star,.search,.tabs{display:none !important;}
+    body{background:#fff !important;}
+    .wrap{max-width:100%;padding:0;}
+    .scene{break-inside:auto;box-shadow:none;}
+    .item{break-inside:avoid;}
+    h2{break-after:avoid;}
+    footer{display:none;}
+    .quiz .zh,.quiz .tip{filter:none !important;}
+    .quiz .txt::after{content:"" !important;}
+  }
+</style>
+</head>
+<body data-tab="social">
+<div class="wrap">
+
+<header>
+  <h1>英語練習手冊</h1>
+  <div class="sub">日常社交 + 多益商務，共 200 句・可搜尋・可朗讀・可遮蔽自測・可收藏</div>
+</header>
+
+<div class="tabs">
+  <button class="tab on" data-tab="social">日常社交<span class="n">Small Talk・100 句</span></button>
+  <button class="tab" data-tab="toeic">多益商務<span class="n">TOEIC・100 句</span></button>
+</div>
+
+<div class="bar">
+  <div class="row">
+    <div class="search">
+      <input id="q" type="search" placeholder="搜尋關鍵字，中英皆可" autocomplete="off">
+      <button class="clr" id="clr" title="清除">×</button>
+    </div>
+    <button class="btn" id="quizBtn">👁 自測</button>
+    <button class="btn" id="favBtn">★ 收藏<span class="cnt" id="favCnt"></span></button>
+    <button class="btn" id="themeBtn">🌙 夜間</button>
+    <button class="btn" id="printBtn">列印 / PDF</button>
+  </div>
+  <div class="chips" id="chips"></div>
+</div>
+
+<div class="meta" id="meta"></div>
+<main id="main"></main>
+
+<footer>
+  本網站為學習用途之自製整理，例句為商業與日常英語通用表達，非取自任何特定出版物或題庫。<br>
+  朗讀功能使用瀏覽器內建語音合成，無須連網下載音檔。
+</footer>
+
+</div>
+
+<script>
+const SCENES = {
+  social: [
+    {t:"場景一：破冰開場（第一次見面）", note:"第一次見面不要問太多個人資訊，先找當下看得到的共同點。"},
+    {t:"場景二：電梯、走廊、茶水間（30 秒以內）", note:"時間短就不用硬聊，一句觀察加一句收尾就夠，重點是讓對方記得你是友善的。"},
+    {t:"場景三：會議前後與商務場合", note:"關鍵是「已知對方的具體事件」，比泛泛問近況有用十倍。"},
+    {t:"場景四：接待外商、帶客人參觀", note:"地主優勢：食物、天氣、行程都是你可以主導的話題。"},
+    {t:"場景五：用餐與應酬", note:"食物是全世界最不會出錯的話題，記得把決定權丟給對方。"},
+    {t:"場景六：稱讚別人與回應稱讚", note:"稱讚要具體、回應要接住。過度否認反而讓對方尷尬。"},
+    {t:"場景七：接話與延續（這區最重要）", note:"聊不下去通常不是詞彙不夠，是少了「從對方回答裡抓一個點往下問」這一步。"},
+    {t:"場景八：救冷場與轉話題", note:"冷場不用慌，轉得漂亮比硬撐有價值。"},
+    {t:"場景九：優雅收尾", note:"Small Talk 有一半的本事在懂得結束。把理由放在自己身上最體貼。"},
+    {t:"場景十：視訊、電話與遠距", note:"遠距少了肢體語言，開場與收尾的招呼語要更明確。"}
+  ],
+  toeic: [
+    {t:"一、辦公室日常 Office", note:"多益最高頻的情境。考的是指令、時程、內部溝通，句子短、資訊密度高。"},
+    {t:"二、會議 Meetings", note:"常考「誰說了什麼、結論是什麼、下一步做什麼」，動詞片語是關鍵。"},
+    {t:"三、客戶往來與拜訪 Clients", note:"接待、報價、提案、維繫關係。注意禮貌層級與承諾用詞。"},
+    {t:"四、出差與訂位 Travel", note:"訂票、訂房、改期、報帳。數字、時間、地點一定要聽清楚。"},
+    {t:"五、訂單與出貨 Orders", note:"數量、單價、折扣、交期、缺貨。多益聽力很愛出「改了什麼」。"},
+    {t:"六、客服與客訴 Customer Service", note:"道歉、查詢、補救方案。語氣一定是先安撫再解決。"},
+    {t:"七、人事與招募 HR", note:"招募、面試、升遷、訓練、福利。常考職稱與部門名稱。"},
+    {t:"八、財務與付款 Finance", note:"發票、帳款、預算、付款條件。金額與日期是解題關鍵。"},
+    {t:"九、簡報與報告 Presentations", note:"圖表描述、成長率、趨勢、結論。這區的句型在 Part 4 幾乎必出。"},
+    {t:"十、電話與視訊 Phone & Remote", note:"轉接、聽不清楚、回電、開擴音。多益愛考「他為什麼打來」。"}
+  ]
+};
+
+const DATA = [
+/* ── 日常社交 ── */
+{tab:'social',s:0,en:"Hi, I don't think we've met — I'm Jump.",zh:"你好，我們應該還沒見過——我是 Jump。",tip:"最穩的起手式。[[接：]] What about you — how do you know the host?"},
+{tab:'social',s:0,en:"Is this your first time here?",zh:"你第一次來這裡嗎？",tip:"活動、會議、城市都通用。"},
+{tab:'social',s:0,en:"What brings you here today?",zh:"今天什麼風把你吹來的？",tip:"比「What do you do?」柔軟，不會像在盤問。"},
+{tab:'social',s:0,en:"How do you know [Name]?",zh:"你怎麼認識＿＿的？",tip:"有共同認識的人時最好用。"},
+{tab:'social',s:0,en:"I love your jacket — where did you get it?",zh:"你這件外套好看，哪裡買的？",tip:"讚美物件不讚美身體，比較不失禮。"},
+{tab:'social',s:0,en:"That coffee smells amazing. Is it from downstairs?",zh:"這咖啡好香，是樓下買的嗎？",tip:"就地取材，完全不用動腦。"},
+{tab:'social',s:0,en:"Have you been to one of these before?",zh:"這種場合你之前來過嗎？",tip:"把球丟給對方，壓力最小。"},
+{tab:'social',s:0,en:"Looks like we're both early.",zh:"看來我們都來早了。",tip:"會議開始前的空檔最好用。"},
+{tab:'social',s:0,en:"Mind if I join you?",zh:"介意我坐這邊嗎？",tip:"加入別人談話前的一句禮貌。"},
+{tab:'social',s:0,en:"I'm terrible at these things, but — how's your day going?",zh:"我不太會這種場合，不過——你今天還好嗎？",tip:"自嘲反而讓氣氛變真，母語者常用。"},
+
+{tab:'social',s:1,en:"Heading up or down?",zh:"上樓還下樓？",tip:"電梯裡最短的安全句。"},
+{tab:'social',s:1,en:"This elevator is faster than usual today.",zh:"這電梯今天比平常快。",tip:"沒內容也沒關係，重點是釋出善意。"},
+{tab:'social',s:1,en:"Busy morning?",zh:"早上很忙嗎？",tip:"疑問句上揚即可，對方一句話就能接。"},
+{tab:'social',s:1,en:"Back-to-back meetings?",zh:"一場接一場開會嗎？",tip:"看到對方抱著筆電衝來衝去時用。"},
+{tab:'social',s:1,en:"Long line today.",zh:"今天排得真長。",tip:"陳述句比問句更自然，不必等回答。"},
+{tab:'social',s:1,en:"Is this room always this cold, or is it just me?",zh:"這間一直這麼冷，還是只有我覺得？",tip:"小抱怨是很好的破冰材料。"},
+{tab:'social',s:1,en:"Did you get caught in the rain earlier?",zh:"你剛剛有淋到雨嗎？",tip:"天氣一定要配一個具體細節，才不像背句型。"},
+{tab:'social',s:1,en:"How was your commute today?",zh:"今天通勤還順嗎？",tip:"台灣人常忘：通勤是超級安全的話題。"},
+{tab:'social',s:1,en:"You're here early too.",zh:"你也這麼早。",tip:"尋找共同處，很快能拉近。"},
+{tab:'social',s:1,en:"Have a good one!",zh:"祝你順心！",tip:"30 秒對話的標準收尾，最實用的一句。"},
+
+{tab:'social',s:2,en:"How's your week been so far?",zh:"這週到目前還順嗎？",tip:"「How are you?」的升級版，對方比較有得答。"},
+{tab:'social',s:2,en:"How's the [project] coming along?",zh:"那個專案進行得如何？",tip:"已知對方在做什麼時，比泛問更有誠意。"},
+{tab:'social',s:2,en:"Anything exciting on your plate this week?",zh:"這週手上有什麼特別的事嗎？",tip:"on your plate 是很道地的說法。"},
+{tab:'social',s:2,en:"Did that client call go okay?",zh:"那通客戶電話還順利嗎？",tip:"表示你有在注意對方的工作，很加分。"},
+{tab:'social',s:2,en:"How are you finding the conference so far?",zh:"這場研討會你目前覺得如何？",tip:"How are you finding... 是英式很常用的問法。"},
+{tab:'social',s:2,en:"Which session did you like the most?",zh:"你最喜歡哪一場？",tip:"容易引出真正對話。"},
+{tab:'social',s:2,en:"Shall we get started?",zh:"我們開始吧？",tip:"從閒聊切回正題的萬用句。"},
+{tab:'social',s:2,en:"Before we jump in — how was everyone's weekend?",zh:"開始之前，大家週末過得如何？",tip:"主持會議時暖場用。"},
+{tab:'social',s:2,en:"Good to finally put a face to the name.",zh:"終於見到本人了。",tip:"郵件往來很久終於見面時，非常自然。"},
+{tab:'social',s:2,en:"Thanks for making the time — I know you're busy.",zh:"謝謝你撥空，我知道你很忙。",tip:"結束時說，體貼感很強。"},
+
+{tab:'social',s:3,en:"Did you have a good flight?",zh:"飛機還順吧？",tip:"接機第一句，永遠安全。"},
+{tab:'social',s:3,en:"Is this your first time in Taiwan?",zh:"第一次來台灣嗎？",tip:"對方答 yes 就順勢介紹；答 no 就問之前來做什麼。"},
+{tab:'social',s:3,en:"How long are you staying?",zh:"這次停留幾天？",tip:"問行程不問私事，很得體。"},
+{tab:'social',s:3,en:"Have you tried the food here yet?",zh:"這裡的食物你吃過了嗎？",tip:"台灣人最好發揮的話題，最容易聊開。"},
+{tab:'social',s:3,en:"Let me know if you need anything at all.",zh:"有任何需要都跟我說。",tip:"接待方的標準款待句。"},
+{tab:'social',s:3,en:"Can I get you something to drink?",zh:"要不要喝點什麼？",tip:"接待的基本動作。"},
+{tab:'social',s:3,en:"How does it compare to back home?",zh:"跟你家鄉比起來如何？",tip:"很棒的第二層問題，能聊出文化差異。"},
+{tab:'social',s:3,en:"Is there anything you'd like to see while you're here?",zh:"這趟有沒有特別想去看的地方？",tip:"表現地主之誼。"},
+{tab:'social',s:3,en:"Let me show you around a bit.",zh:"我帶你稍微看一下環境。",tip:"自然帶動動線。"},
+{tab:'social',s:3,en:"Hope you enjoy the rest of your stay.",zh:"祝你這趟剩餘的行程愉快。",tip:"送客收尾。"},
+
+{tab:'social',s:4,en:"Have you been here before?",zh:"這家你來過嗎？",tip:"坐下來第一句。"},
+{tab:'social',s:4,en:"What would you recommend?",zh:"有什麼推薦的嗎？",tip:"把決定權給對方，很受用。"},
+{tab:'social',s:4,en:"This is a local specialty — you have to try it.",zh:"這是當地特色，你一定要試試。",tip:"介紹台灣菜時用。"},
+{tab:'social',s:4,en:"Are you adventurous with food?",zh:"吃東西你敢嘗試嗎？",tip:"比「Do you like...?」有趣得多。"},
+{tab:'social',s:4,en:"How's your dish?",zh:"你那道如何？",tip:"上菜後的自然話題。"},
+{tab:'social',s:4,en:"Do you cook at all?",zh:"你自己會下廚嗎？",tip:"食物話題往下延伸的好句。"},
+{tab:'social',s:4,en:"Let me top up your glass.",zh:"我幫你添一下。",tip:"斟酒添茶的道地說法。"},
+{tab:'social',s:4,en:"I'll let you get back to your meal.",zh:"不打擾你用餐了。",tip:"打擾後的漂亮退場。"},
+{tab:'social',s:4,en:"Shall we get the bill?",zh:"我們買單好嗎？",tip:"英式用 bill，美式常用 check。"},
+{tab:'social',s:4,en:"That was a great meal — thanks for the recommendation.",zh:"這頓很棒，謝謝你推薦。",tip:"收尾感謝，留下好印象。"},
+
+{tab:'social',s:5,en:"That was a great presentation.",zh:"你那場簡報很精采。",tip:"具體指名哪一件事，比泛泛說 good job 有力。"},
+{tab:'social',s:5,en:"I really like how you handled that.",zh:"你處理那件事的方式我很欣賞。",tip:"稱讚做法不稱讚天賦，更專業。"},
+{tab:'social',s:5,en:"You have a great eye for detail.",zh:"你對細節很有眼光。",tip:"職場讚美的高級句。"},
+{tab:'social',s:5,en:"Your English is really impressive.",zh:"你英文真好。",tip:"收到這句時不要說「No no no」。"},
+{tab:'social',s:5,en:"Thanks — I've been working on it.",zh:"謝啦，我一直在練。",tip:"[[回應稱讚的正解：]]謝過加一句補充，不要過度否認。"},
+{tab:'social',s:5,en:"That's very kind of you to say.",zh:"你這麼說真好。",tip:"不知道怎麼回時的安全牌。"},
+{tab:'social',s:5,en:"Thanks, that means a lot.",zh:"謝謝，這對我意義很大。",tip:"來自前輩或客戶時用。"},
+{tab:'social',s:5,en:"It was a team effort, honestly.",zh:"說真的，那是團隊的功勞。",tip:"謙虛但不否定，比「沒有啦」得體。"},
+{tab:'social',s:5,en:"I love your approach to this.",zh:"我很喜歡你處理這件事的角度。",tip:"對同儕用，不會顯得像在上對下。"},
+{tab:'social',s:5,en:"You made that look easy.",zh:"你做起來好像很輕鬆。",tip:"輕鬆場合的讚美，很討喜。"},
+
+{tab:'social',s:6,en:"Oh really? How was that?",zh:"真的嗎？如何啊？",tip:"萬能追問第一句，幾乎任何回答後都能接。"},
+{tab:'social',s:6,en:"Tell me more about that.",zh:"再多說一點。",tip:"表現真有興趣，對方會很樂意講。"},
+{tab:'social',s:6,en:"What happened after that?",zh:"後來呢？",tip:"故事型回答用這句最好。"},
+{tab:'social',s:6,en:"That sounds interesting — where did you go?",zh:"聽起來不錯，你們去哪裡？",tip:"[[先回應再追問]]，這才是自然對話。"},
+{tab:'social',s:6,en:"I know exactly what you mean.",zh:"我完全懂你在說什麼。",tip:"建立共鳴最有效。"},
+{tab:'social',s:6,en:"Same here — I had a similar experience.",zh:"我也是，我有過類似經驗。",tip:"分享一點自己的，對話才會平衡。"},
+{tab:'social',s:6,en:"Wait, how did you get into that?",zh:"等等，你怎麼開始做這個的？",tip:"問「怎麼開始的」永遠比問「做什麼」好聊。"},
+{tab:'social',s:6,en:"No way. Seriously?",zh:"不會吧，認真的？",tip:"口語感強，熟一點的場合用。"},
+{tab:'social',s:6,en:"That's a good point — I hadn't thought of it that way.",zh:"這點很好，我沒這樣想過。",tip:"商務場合的接話，顯得你有在聽。"},
+{tab:'social',s:6,en:"What was the highlight for you?",zh:"對你來說最精采的是哪部分？",tip:"把開放式問題收斂一點，比較好答。"},
+
+{tab:'social',s:7,en:"Anyway — how's everything on your end?",zh:"話說回來，你那邊一切還好嗎？",tip:"卡住時的萬用跳板。"},
+{tab:'social',s:7,en:"Speaking of which, did you hear about...?",zh:"說到這個，你有聽說＿＿嗎？",tip:"從對方的關鍵字順勢轉向。"},
+{tab:'social',s:7,en:"That reminds me — have you tried...?",zh:"這讓我想到，你有試過＿＿嗎？",tip:"轉得很自然，不生硬。"},
+{tab:'social',s:7,en:"Sorry, I completely lost my train of thought.",zh:"抱歉，我剛完全斷線了。",tip:"腦袋空白時誠實講，比硬擠好。"},
+{tab:'social',s:7,en:"Let me think about that for a second.",zh:"讓我想一下。",tip:"買時間用，不會顯得卡住。"},
+{tab:'social',s:7,en:"I'm not the best person to ask, honestly.",zh:"說真的，問我不是最佳人選。",tip:"不懂的話題可以這樣卸掉。"},
+{tab:'social',s:7,en:"We'll have to agree to disagree.",zh:"這點我們就各自保留吧。",tip:"意見不合時的和緩收場，非常重要。"},
+{tab:'social',s:7,en:"Let's park that for now.",zh:"這個先放著。",tip:"會議上擱置爭議的道地說法。"},
+{tab:'social',s:7,en:"Where were we?",zh:"我們剛講到哪？",tip:"岔題後拉回來。"},
+{tab:'social',s:7,en:"Do you mind if I switch topics for a second?",zh:"介意我換個話題嗎？",tip:"要轉進正事時很有禮貌。"},
+
+{tab:'social',s:8,en:"It was really nice talking to you.",zh:"很高興跟你聊。",tip:"最基本也最不會錯。"},
+{tab:'social',s:8,en:"I should let you go — I know you're busy.",zh:"不打擾你了，我知道你忙。",tip:"把結束的理由放在自己身上，最體貼。"},
+{tab:'social',s:8,en:"I don't want to keep you.",zh:"不想佔用你太多時間。",tip:"非常常用的退場句。"},
+{tab:'social',s:8,en:"Let's catch up again soon.",zh:"找時間再聊。",tip:"catch up 是「敘舊、更新近況」的意思。"},
+{tab:'social',s:8,en:"I'll follow up with you by email.",zh:"我再寄信跟你聯繫。",tip:"商務場合收尾必備。"},
+{tab:'social',s:8,en:"Can I grab your card?",zh:"方便給我一張名片嗎？",tip:"交換聯絡方式。"},
+{tab:'social',s:8,en:"Let me get your contact — I'd love to stay in touch.",zh:"給我個聯絡方式吧，想保持聯繫。",tip:"比單純換名片更有溫度。"},
+{tab:'social',s:8,en:"Let me introduce you to [Name] — you two should meet.",zh:"我介紹你認識＿＿，你們應該認識一下。",tip:"[[最高級的收尾：]]把人推出去，替他創造價值。"},
+{tab:'social',s:8,en:"Enjoy the rest of the event!",zh:"祝你接下來的活動愉快！",tip:"活動場合通用。"},
+{tab:'social',s:8,en:"Take care — talk soon.",zh:"保重，再聊。",tip:"收尾最後一句。"},
+
+{tab:'social',s:9,en:"Can everyone hear me okay?",zh:"大家都聽得到嗎？",tip:"開場確認。"},
+{tab:'social',s:9,en:"Looks like we're just waiting on one more.",zh:"看起來還差一位。",tip:"等待時的暖場。"},
+{tab:'social',s:9,en:"How's the weather over there?",zh:"你那邊天氣如何？",tip:"跨國視訊的自然話題。"},
+{tab:'social',s:9,en:"Sorry, you froze for a second there.",zh:"抱歉，你剛畫面停了一下。",tip:"技術狀況的道地說法。"},
+{tab:'social',s:9,en:"I'll share my screen now.",zh:"我現在分享畫面。",tip:"從閒聊切進正題。"},
+{tab:'social',s:9,en:"Let's pick this up where we left off.",zh:"我們從上次停的地方接續。",tip:"第二次會議開場。"},
+{tab:'social',s:9,en:"Before we hang up — anything else?",zh:"掛電話前，還有別的嗎？",tip:"電話收尾。"},
+{tab:'social',s:9,en:"Thanks for taking the call.",zh:"謝謝你接這通電話。",tip:"接到陌生來電之後的禮貌。"},
+{tab:'social',s:9,en:"I'll send a quick recap after this.",zh:"會後我寄一份重點整理。",tip:"顯得可靠。"},
+{tab:'social',s:9,en:"Thanks for your time — appreciate it.",zh:"謝謝你的時間，很感謝。",tip:"遠距收尾最穩的一句。"},
+
+/* ── 多益商務 ── */
+{tab:'toeic',s:0,en:"I'll get back to you by the end of the day.",zh:"我今天下班前回覆你。",tip:"[[高頻：]] get back to you＝回覆某人。多益常以「何時回覆」出題。"},
+{tab:'toeic',s:0,en:"Could you cc me on that email?",zh:"可以把我副本進那封信嗎？",tip:"[[考點：]] cc＝副本（carbon copy），bcc＝密件副本。"},
+{tab:'toeic',s:0,en:"The meeting has been pushed back to 3 p.m.",zh:"會議延到下午三點。",tip:"[[考點：]] push back＝延後；move up＝提前。方向別記反。"},
+{tab:'toeic',s:0,en:"I'm out of the office until Monday.",zh:"我週一前不在辦公室。",tip:"[[考點：]] 自動回覆信件的常見句，多益閱讀愛考。"},
+{tab:'toeic',s:0,en:"Let's touch base tomorrow morning.",zh:"我們明早再碰一下。",tip:"[[高頻片語：]] touch base with someone＝短暫聯繫、對一下進度。"},
+{tab:'toeic',s:0,en:"Can you walk me through the process?",zh:"你可以帶我跑一遍流程嗎？",tip:"[[高頻：]] walk someone through＝一步步說明。常與 procedure 一起出現。"},
+{tab:'toeic',s:0,en:"I'll loop in the design team on this.",zh:"我會把設計團隊拉進來一起看。",tip:"[[高頻：]] loop in＝把某人納入溝通。同義替換常出 involve／include。"},
+{tab:'toeic',s:0,en:"She's on another line right now.",zh:"她正在講另一通電話。",tip:"[[考點：]] on another line＝通話中。電話情境必背。"},
+{tab:'toeic',s:0,en:"Please hold off on that until further notice.",zh:"那件事請暫緩，等候進一步通知。",tip:"[[考點：]] hold off＝暫緩；until further notice＝等候通知。"},
+{tab:'toeic',s:0,en:"We're on a tight deadline.",zh:"我們的期限很緊。",tip:"[[考點：]] tight deadline／meet the deadline／extend the deadline，三個常一起考。"},
+
+{tab:'toeic',s:1,en:"Let's go over the agenda first.",zh:"我們先過一下議程。",tip:"[[考點：]] go over＝逐項檢視；agenda 是必背字。"},
+{tab:'toeic',s:1,en:"Can we circle back to that later?",zh:"那點可以稍後再回來談嗎？",tip:"[[高頻片語：]] circle back＝回頭再談。同義替換是 revisit。"},
+{tab:'toeic',s:1,en:"I'd like to add one more item to the agenda.",zh:"我想在議程上再加一項。",tip:"[[考點：]] item＝議程項目，也出現在訂單情境，注意一詞多義。"},
+{tab:'toeic',s:1,en:"Just to make sure we're on the same page —",zh:"先確認一下我們認知一致——",tip:"[[高頻片語：]] on the same page＝有共識。多益聽力很常出現。"},
+{tab:'toeic',s:1,en:"Could you elaborate on that point?",zh:"可以就這點再說明一下嗎？",tip:"[[考點：]] elaborate on＝詳述。選項常替換成 explain further。"},
+{tab:'toeic',s:1,en:"Let's table this for now.",zh:"這個我們先擱置。",tip:"[[必考陷阱：]] 美式＝擱置、英式＝列入議程，意思完全相反，看上下文判斷。"},
+{tab:'toeic',s:1,en:"We're running out of time.",zh:"我們時間快不夠了。",tip:"[[考點：]] run out of＝用盡。常與 time／budget／stock 搭配。"},
+{tab:'toeic',s:1,en:"Let's take this offline.",zh:"這個我們會後私下談。",tip:"[[考點：]] take it offline＝不在會中討論。字面看不出意思，要背。"},
+{tab:'toeic',s:1,en:"To sum up, we've agreed on three points.",zh:"總結一下，我們達成三點共識。",tip:"[[考點：]] sum up＝總結。常接 reach／agree on an agreement。"},
+{tab:'toeic',s:1,en:"I'll send the minutes right after the meeting.",zh:"會後我馬上寄會議紀錄。",tip:"[[考點：]] minutes＝會議紀錄（複數）。這是多益經典陷阱字。"},
+
+{tab:'toeic',s:2,en:"I'll have someone pick you up at the airport.",zh:"我會派人到機場接你。",tip:"[[考點：]] pick up＝接人；也可指「取貨」，一詞多義。"},
+{tab:'toeic',s:2,en:"Would Tuesday afternoon work for you?",zh:"週二下午你方便嗎？",tip:"[[考點：]] work for someone＝對某人方便。商務約時間的萬用句。"},
+{tab:'toeic',s:2,en:"I'll arrange a tour of the facility.",zh:"我會安排參觀廠區。",tip:"[[高頻字：]] facility＝設施、廠區。多益閱讀常出現。"},
+{tab:'toeic',s:2,en:"Please let us know if there's anything we can do.",zh:"有任何我們能做的，請告訴我們。",tip:"[[考點：]] 商務書信的標準客套句，常在閱讀測驗出現。"},
+{tab:'toeic',s:2,en:"We'd be happy to extend the warranty.",zh:"我們樂意延長保固。",tip:"[[必背字：]] warranty＝保固。與 guarantee 意思接近但用法不同。"},
+{tab:'toeic',s:2,en:"I'll get you a quote by Friday.",zh:"我週五前給你報價。",tip:"[[考點：]] quote／quotation＝報價單；estimate＝估價。"},
+{tab:'toeic',s:2,en:"Thank you for considering our proposal.",zh:"謝謝你考慮我們的提案。",tip:"[[考點：]] proposal 常與 submit／review／accept 搭配出題。"},
+{tab:'toeic',s:2,en:"We look forward to a long-term partnership.",zh:"期待長期合作。",tip:"[[文法考點：]] look forward to 後面接名詞或 V-ing，不接原形動詞。"},
+{tab:'toeic',s:2,en:"I'll follow up on our discussion next week.",zh:"下週我會就我們談的內容跟進。",tip:"[[高頻：]] follow up on＝就某事跟進。名詞寫法是 follow-up。"},
+{tab:'toeic',s:2,en:"Let me introduce our sales manager, Ms. Chen.",zh:"讓我介紹我們的業務經理陳小姐。",tip:"[[考點：]] 職稱加姓氏的介紹順序，聽力常考「誰是誰」。"},
+
+{tab:'toeic',s:3,en:"I'd like to book a round-trip ticket to Singapore.",zh:"我想訂一張往新加坡的來回票。",tip:"[[考點：]] round-trip＝來回；one-way＝單程。"},
+{tab:'toeic',s:3,en:"Could I get an aisle seat, please?",zh:"可以給我靠走道的位子嗎？",tip:"[[考點：]] aisle＝走道，發音像「艾歐」，s 不發音；window seat＝靠窗。"},
+{tab:'toeic',s:3,en:"Is breakfast included in the rate?",zh:"房價有含早餐嗎？",tip:"[[考點：]] rate＝房價、費率。included／complimentary 都常出。"},
+{tab:'toeic',s:3,en:"I need to change my reservation.",zh:"我要更改訂位。",tip:"[[考點：]] reservation＝訂位；reschedule＝改期。"},
+{tab:'toeic',s:3,en:"What time is check-out?",zh:"幾點退房？",tip:"[[考點：]] check-in／check-out 是住宿情境必考。"},
+{tab:'toeic',s:3,en:"Could you call me a taxi, please?",zh:"可以幫我叫計程車嗎？",tip:"[[考點：]] 飯店服務句型，常出現在 Part 2 應答。"},
+{tab:'toeic',s:3,en:"The flight has been delayed by two hours.",zh:"班機延誤兩小時。",tip:"[[考點：]] delayed／postponed／cancelled 三個狀態常一起考。"},
+{tab:'toeic',s:3,en:"I'd like to extend my stay by one night.",zh:"我想多住一晚。",tip:"[[考點：]] extend by＝延長多久；extend to＝延長到某時點。"},
+{tab:'toeic',s:3,en:"Do you offer a corporate rate?",zh:"你們有企業優惠價嗎？",tip:"[[考點：]] corporate＝企業的。corporate account／corporate rate 常出。"},
+{tab:'toeic',s:3,en:"I'll need a receipt for reimbursement.",zh:"我需要收據來報帳。",tip:"[[必背字：]] reimbursement＝報帳、核銷。多益超高頻。"},
+
+{tab:'toeic',s:4,en:"We'd like to place a bulk order.",zh:"我們想下一筆大量訂單。",tip:"[[考點：]] place an order＝下單；bulk＝大量。"},
+{tab:'toeic',s:4,en:"Could you send us a sample first?",zh:"可以先寄樣品給我們嗎？",tip:"[[考點：]] sample＝樣品，選項常替換成 specimen。"},
+{tab:'toeic',s:4,en:"The shipment is scheduled for next Monday.",zh:"這批貨預計下週一出貨。",tip:"[[文法考點：]] be scheduled for＋時間／be scheduled to＋動詞。"},
+{tab:'toeic',s:4,en:"Your order is currently out of stock.",zh:"你的訂單目前缺貨。",tip:"[[考點：]] out of stock＝缺貨；in stock＝有現貨。反義對比常出。"},
+{tab:'toeic',s:4,en:"We can offer a 10% discount on orders over 500 units.",zh:"500 件以上的訂單可給九折。",tip:"[[考點：]] discount on＋商品。數字與條件是解題關鍵。"},
+{tab:'toeic',s:4,en:"Please confirm the quantity and specifications.",zh:"請確認數量與規格。",tip:"[[必背字：]] specifications＝規格，常縮寫成 spec。"},
+{tab:'toeic',s:4,en:"The lead time is approximately three weeks.",zh:"交期大約三週。",tip:"[[必背字：]] lead time＝從下單到交貨的時間。多益高頻。"},
+{tab:'toeic',s:4,en:"There's been a delay in production.",zh:"生產有延誤。",tip:"[[考點：]] delay in＋名詞。多益愛問「延誤的原因是什麼」。"},
+{tab:'toeic',s:4,en:"We'll cover the shipping costs.",zh:"運費由我們負擔。",tip:"[[考點：]] cover＝負擔費用，選項常替換成 bear／absorb。"},
+{tab:'toeic',s:4,en:"I'm attaching the invoice to this email.",zh:"我把發票附在這封信裡。",tip:"[[必背字：]] invoice＝發票、請款單；receipt＝收據。兩者不同。"},
+
+{tab:'toeic',s:5,en:"I'm sorry for the inconvenience.",zh:"造成不便，很抱歉。",tip:"[[考點：]] inconvenience 是客服情境的必備字。"},
+{tab:'toeic',s:5,en:"Could you give me your order number?",zh:"可以給我你的訂單編號嗎？",tip:"[[考點：]] 客服第一步行動，Part 3 常考「他為什麼問這個」。"},
+{tab:'toeic',s:5,en:"Let me look into that for you.",zh:"我幫你查一下。",tip:"[[高頻片語：]] look into＝調查、查明，同義替換是 investigate。"},
+{tab:'toeic',s:5,en:"I'll transfer you to the right department.",zh:"我幫你轉到負責的部門。",tip:"[[考點：]] transfer／forward／redirect 都表轉接或轉寄。"},
+{tab:'toeic',s:5,en:"We'll issue a full refund.",zh:"我們會辦理全額退款。",tip:"[[必背字：]] refund＝退款。issue a refund 是固定搭配。"},
+{tab:'toeic',s:5,en:"It should be resolved within 24 hours.",zh:"應該會在 24 小時內處理好。",tip:"[[考點：]] resolve＝解決；within＝在時間之內，別與 in 混淆。"},
+{tab:'toeic',s:5,en:"Thank you for bringing this to our attention.",zh:"謝謝你告訴我們這件事。",tip:"[[考點：]] bring to one's attention＝讓某人注意到。書信高頻。"},
+{tab:'toeic',s:5,en:"Would you prefer a replacement or a refund?",zh:"你想換貨還是退款？",tip:"[[考點：]] replacement＝替換品。二選一的問法是 Part 3 常見題型。"},
+{tab:'toeic',s:5,en:"I understand your frustration.",zh:"我理解你的不滿。",tip:"[[考點：]] frustration＝受挫、不滿。客服先安撫再處理。"},
+{tab:'toeic',s:5,en:"Is there anything else I can help you with?",zh:"還有什麼需要我協助的嗎？",tip:"[[考點：]] 客服結尾標準句，聽到這句通常代表對話要結束了。"},
+
+{tab:'toeic',s:6,en:"We're looking to fill the position by next month.",zh:"我們希望下個月前補到這個缺。",tip:"[[考點：]] fill a position＝補缺；vacancy＝職缺。"},
+{tab:'toeic',s:6,en:"Could you walk me through your resume?",zh:"可以簡單說明一下你的履歷嗎？",tip:"[[考點：]] resume＝履歷，重音在字尾；當動詞則是「恢復」。"},
+{tab:'toeic',s:6,en:"What are your salary expectations?",zh:"你期望的待遇是多少？",tip:"[[考點：]] expectations＝期望（複數）。相關字：compensation、benefits。"},
+{tab:'toeic',s:6,en:"The position offers a competitive benefits package.",zh:"這個職位提供具競爭力的福利制度。",tip:"[[考點：]] benefits package＝福利方案，是固定說法。"},
+{tab:'toeic',s:6,en:"There will be a three-month probation period.",zh:"會有三個月試用期。",tip:"[[必背字：]] probation period＝試用期。人事公告常出。"},
+{tab:'toeic',s:6,en:"I'd like to apply for the marketing position.",zh:"我想應徵行銷職位。",tip:"[[考點：]] apply for＋職位；apply to＋公司。介系詞是常考點。"},
+{tab:'toeic',s:6,en:"When would you be able to start?",zh:"你什麼時候可以開始上班？",tip:"[[考點：]] 面試必問題。would 是委婉用法。"},
+{tab:'toeic',s:6,en:"We'll notify you of our decision by Friday.",zh:"我們會在週五前通知你結果。",tip:"[[考點：]] notify someone of something，介系詞固定用 of。"},
+{tab:'toeic',s:6,en:"She's been promoted to regional manager.",zh:"她升上區域經理了。",tip:"[[考點：]] be promoted to＋職位。常考「誰升到什麼職位」。"},
+{tab:'toeic',s:6,en:"The training session is mandatory for all new hires.",zh:"新人一律要參加這場訓練。",tip:"[[必背字：]] mandatory＝強制的；new hires＝新進人員。"},
+
+{tab:'toeic',s:7,en:"The payment is due on the 15th.",zh:"付款期限是 15 號。",tip:"[[考點：]] due＝到期。due date／due on 是財務情境高頻。"},
+{tab:'toeic',s:7,en:"Could you send us a purchase order?",zh:"可以寄採購單給我們嗎？",tip:"[[必背字：]] purchase order＝採購單，常縮寫為 PO。"},
+{tab:'toeic',s:7,en:"We accept payment by bank transfer.",zh:"我們接受銀行轉帳。",tip:"[[考點：]] by＋付款方式：by check／by credit card／in cash。"},
+{tab:'toeic',s:7,en:"I think there's an error on the invoice.",zh:"我覺得這張發票有一處錯誤。",tip:"[[考點：]] 發票爭議是財務情境常見題材，注意 discrepancy＝不符。"},
+{tab:'toeic',s:7,en:"Please settle the outstanding balance.",zh:"請結清未付款項。",tip:"[[必背字：]] outstanding balance＝未結餘額；settle＝結清。"},
+{tab:'toeic',s:7,en:"We've revised the budget for next quarter.",zh:"我們調整了下季預算。",tip:"[[考點：]] revise＝修訂；quarter＝季，Q1／Q2 常出現。"},
+{tab:'toeic',s:7,en:"Could you provide a detailed breakdown?",zh:"可以提供詳細明細嗎？",tip:"[[考點：]] breakdown＝明細、細項分析，同義替換是 itemization。"},
+{tab:'toeic',s:7,en:"Payment terms are net 30.",zh:"付款條件是 30 天內付清。",tip:"[[考點：]] net 30＝收到發票後 30 天內付款。財務必考術語。"},
+{tab:'toeic',s:7,en:"The total comes to $4,500.",zh:"總計 4,500 美元。",tip:"[[考點：]] come to／amount to＝總計。聽力要注意數字連音。"},
+{tab:'toeic',s:7,en:"I'll need approval from my manager first.",zh:"我要先取得主管同意。",tip:"[[考點：]] approval from＋人；approval for＋事。介系詞是考點。"},
+
+{tab:'toeic',s:8,en:"Let's move on to the next slide.",zh:"我們看下一張投影片。",tip:"[[考點：]] move on to＝進入下一項。簡報流程的標準句。"},
+{tab:'toeic',s:8,en:"As you can see from the chart, sales have increased.",zh:"如各位從圖表所見，銷售成長了。",tip:"[[考點：]] As you can see 是簡報起手式，Part 4 幾乎必出。"},
+{tab:'toeic',s:8,en:"I'd like to highlight three key findings.",zh:"我想特別指出三項主要發現。",tip:"[[考點：]] findings＝研究發現。數字會是解題關鍵。"},
+{tab:'toeic',s:8,en:"Sales figures are up 15% year on year.",zh:"銷售數字較去年同期成長 15%。",tip:"[[考點：]] year on year＝與去年同期相比。注意 up／down 與百分比。"},
+{tab:'toeic',s:8,en:"This brings me to my next point.",zh:"這帶到我下一點。",tip:"[[考點：]] 簡報轉場句，聽力用來判斷「現在講到第幾點」。"},
+{tab:'toeic',s:8,en:"I'll hand it over to my colleague.",zh:"我把時間交給我的同事。",tip:"[[考點：]] hand over＝交接、交給。常考「接下來誰講」。"},
+{tab:'toeic',s:8,en:"Are there any questions so far?",zh:"到目前為止有問題嗎？",tip:"[[考點：]] so far＝到目前為止，是高頻時間副詞。"},
+{tab:'toeic',s:8,en:"In conclusion, we recommend proceeding with the plan.",zh:"結論是，我們建議繼續執行這個計畫。",tip:"[[考點：]] proceed with＝繼續進行，同義替換是 go ahead with。"},
+{tab:'toeic',s:8,en:"The data suggests a downward trend.",zh:"數據顯示下滑趨勢。",tip:"[[考點：]] trend＝趨勢，upward／downward／steady 常一起考。"},
+{tab:'toeic',s:8,en:"I'll keep this brief.",zh:"我會講快一點、不拖時間。",tip:"[[考點：]] brief＝簡短的。keep it brief 是道地用法。"},
+
+{tab:'toeic',s:9,en:"May I ask who's calling?",zh:"請問哪裡找？",tip:"[[考點：]] 接電話第一句，Part 2 應答題常出。"},
+{tab:'toeic',s:9,en:"Could you speak up a little, please?",zh:"可以請你大聲一點嗎？",tip:"[[考點：]] speak up＝提高音量，不是 speak louder。"},
+{tab:'toeic',s:9,en:"I think we have a bad connection.",zh:"我們線路好像不太好。",tip:"[[考點：]] connection＝線路、連線品質。"},
+{tab:'toeic',s:9,en:"Let me put you on speaker.",zh:"我開擴音。",tip:"[[考點：]] on speaker＝開擴音。與 mute／unmute 同屬會議字彙。"},
+{tab:'toeic',s:9,en:"Sorry, I didn't catch that. Could you repeat it?",zh:"抱歉我沒聽清楚，可以再說一次嗎？",tip:"[[考點：]] catch＝聽清楚。I didn't catch that 是超高頻句。"},
+{tab:'toeic',s:9,en:"I'll call you back in five minutes.",zh:"我五分鐘後回你電話。",tip:"[[考點：]] call back＝回電。多益愛問「他稍後要做什麼」。"},
+{tab:'toeic',s:9,en:"Could you spell that for me?",zh:"可以拼給我聽嗎？",tip:"[[考點：]] 拼字題常考，聽力要注意字母發音與連音。"},
+{tab:'toeic',s:9,en:"I'm having trouble hearing you.",zh:"我聽不太清楚你的聲音。",tip:"[[文法考點：]] have trouble＋V-ing，不是原形動詞。"},
+{tab:'toeic',s:9,en:"Can everyone see my screen?",zh:"大家看得到我的畫面嗎？",tip:"[[考點：]] 視訊會議情境近年出題率明顯提高。"},
+{tab:'toeic',s:9,en:"Let's wait a moment for the others to join.",zh:"我們等一下其他人加入。",tip:"[[文法考點：]] wait for someone to＋動詞，不定詞用法常考。"}
+];
+
+const TABNAME = {social:"日常社交", toeic:"多益商務"};
+
+const LEAD = {
+  social: `
+<div class="formula">
+  <p><b>1. 開場</b>—— 講當下看得到的、兩人共有的東西，不要劈頭問私事。</p>
+  <p><b>2. 追問</b>—— 從對方的回答裡抓一個點往下問。這是最缺的一步，也是聊不下去的真正原因。</p>
+  <p><b>3. 收尾</b>—— Small Talk 有一半的本事在懂得結束，不是聊到乾掉才走。</p>
+</div>
+<p class="note">記法：<b>觀察 → 追問 → 收尾</b>。只做第一步，就會得到「How are you? / Fine.」然後冷場。</p>
+<h2 id="safe-h">七個安全話題，四個地雷區</h2>
+<ul class="mine">
+  <li><b>安全：</b>天氣、交通、會場與場地、食物飲料、週末計畫、旅行經驗、工作近況（不含薪資）。</li>
+  <li><b>地雷：</b>薪資收入、年齡與外貌體重、婚姻與生育、政治宗教。中文裡很常見的問法，放到英文職場會顯得太侵入。</li>
+</ul>`,
+  toeic: `
+<div class="formula">
+  <p><b>金色證書門檻：860 分</b>（聽力加閱讀，滿分 990）。級距：金色 860-990、藍色 730-855、綠色 470-725、棕色 220-469。</p>
+  <p><b>練法建議：</b>每天 10 句。先遮住中文自己想一次，再點開對答案，最後按 🔊 聽一遍。三個動作做完，記憶才會留下來。</p>
+  <p><b>怎麼用自測：</b>按上方「👁 自測」，中文與考點會先蓋住，點一下才顯示。</p>
+</div>
+<h2 id="trap-h">多益最常見的四個陷阱</h2>
+<ul class="mine">
+  <li><b>一、同義替換：</b>選項不會照抄原句。聽到 postpone，選項寫 reschedule；聽到 purchase，選項寫 buy。要記「意思」不是記「字」。</li>
+  <li><b>二、美式英式混用：</b>電梯 elevator／lift、地鐵 subway／underground、行動電話 cell phone／mobile phone，兩種都會出現。</li>
+  <li><b>三、一詞多義：</b>minutes 不是「分鐘」而是「會議紀錄」；table 當動詞在美式是「擱置」；cover 可以是「涵蓋」也可以是「負擔費用」。</li>
+  <li><b>四、聽力連音：</b>Did you 聽起來像 Dija、want to 像 wanna、meet you 像 meechu。朗讀功能多按幾次，耳朵會慢慢跟上。</li>
+</ul>`
+};
+
+const TAIL = {
+  social: `
+<h2 id="pitfall">台灣人最常踩的三個坑</h2>
+<div class="bad">
+  <h3>1. 把「How are you?」當成真正的問題</h3>
+  <p>英文裡它是招呼語，不是問候健康。標準答案是「Good, thanks — you?」一句帶過，不要開始報告今天發生什麼事。</p>
+  <h3>2. 秒回「No, no, my English is bad」</h3>
+  <p>被稱讚就否認，在英文語境裡會讓對方尷尬，等於否定他的判斷。直接說 <span class="en">Thanks, I've been practicing.</span> 就好。</p>
+  <h3>3. 把中文的關心直譯過去</h3>
+  <p>「你幾歲？」「結婚了嗎？」「一個月賺多少？」在中文是熱絡，在英文職場是越界。想表示關心，改成問對方最近在忙什麼、週末怎麼過。</p>
+</div>`,
+  toeic: `
+<h2 id="study">考前兩週怎麼用這份</h2>
+<div class="bad">
+  <h3>第一週：認字，不求快</h3>
+  <p>一天一區，10 句。先遮中文想意思，想不出來就看考點。重點是把片語記牢——多益的分數落差多半來自片語，不是單字量。</p>
+  <h3>第二週：聽，不看字</h3>
+  <p>打開 🔊 只聽英文，聽完再點開對照。聽不出來的句子標星號，隔天先複習標星號的那幾句。</p>
+  <h3>考前三天：只看考點</h3>
+  <p>把考點掃一遍就好。特別是美式英式差異、一詞多義那幾條，考試當天最容易被騙。</p>
+</div>`
+};
+
+/* ?all=1 → 一次輸出兩區全部內容，供列印／存 PDF 用 */
+const PRINT_ALL = new URLSearchParams(location.search).get('all')==='1';
+const KEY='st-fav-v1', QKEY='st-quiz-v1', TKEY='st-theme-v1';
+let favs=[]; try{ favs=JSON.parse(localStorage.getItem(KEY)||'[]'); }catch(e){ favs=[]; }
+let tab='social', scene='all', onlyFav=false, kw='', quiz=false;
+try{ quiz = localStorage.getItem(QKEY)==='1'; }catch(e){}
+
+const main=document.getElementById('main');
+const chipBox=document.getElementById('chips');
+const meta=document.getElementById('meta');
+const q=document.getElementById('q');
+const clr=document.getElementById('clr');
+const favBtn=document.getElementById('favBtn');
+const favCnt=document.getElementById('favCnt');
+const themeBtn=document.getElementById('themeBtn');
+const quizBtn=document.getElementById('quizBtn');
+
+const esc = s => s.replace(/[&<>]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[m]));
+const rich = s => esc(s).replace(/\[\[/g,'<b>').replace(/\]\]/g,'</b>');
+function hl(s,k){
+  const base = rich(s);
+  if(!k) return base;
+  try{ return base.replace(new RegExp('('+k.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','gi'),'<mark>$1</mark>'); }
+  catch(e){ return base; }
+}
+
+function buildChips(){
+  const list = SCENES[tab];
+  const html=[`<button class="chip ${scene==='all'?'on':''}" data-sc="all">全部</button>`,
+              `<button class="chip ${scene==='lead'?'on':''}" data-sc="lead">重點提示</button>`];
+  list.forEach((s,i)=>{
+    const name = s.t.replace(/^場景[一二三四五六七八九十]+：/,'').replace(/^[一二三四五六七八九十]+、/,'');
+    html.push(`<button class="chip ${scene===String(i)?'on':''}" data-sc="${i}">${i+1}. ${name}</button>`);
+  });
+  html.push(`<button class="chip ${scene==='tail'?'on':''}" data-sc="tail">${tab==='social'?'常踩的坑':'考前怎麼用'}</button>`);
+  chipBox.innerHTML=html.join('');
+  chipBox.querySelectorAll('.chip').forEach(c=>{
+    c.onclick=()=>{
+      scene=c.dataset.sc;
+      if(scene!=='all'){ onlyFav=false; updateFavBtn(); }
+      kw=''; q.value=''; clr.classList.remove('on');
+      buildChips(); render();
+      window.scrollTo({top:0,behavior:'smooth'});
+    };
+  });
+}
+
+function itemHTML(d){
+  const on = favs.includes(d.en);
+  return `<div class="item">
+    <div class="top">
+      <button class="say" data-en="${esc(d.en)}" title="朗讀">🔊</button>
+      <div class="txt">
+        <div class="en">${hl(d.en,kw)}</div>
+        <div class="zh">${hl(d.zh,kw)}</div>
+        ${d.tip?`<div class="tip">${hl(d.tip,kw)}</div>`:''}
+      </div>
+      <button class="star ${on?'on':''}" data-en="${esc(d.en)}" title="收藏">${on?'★':'☆'}</button>
+    </div>
+  </div>`;
+}
+
+const matches = d => {
+  if(onlyFav && !favs.includes(d.en)) return false;
+  if(!kw) return true;
+  return (d.en+' '+d.zh+' '+d.tip).toLowerCase().includes(kw.toLowerCase());
+};
+
+function render(){
+  if(PRINT_ALL){ renderAll(); return; }
+  let html='', shown=0, total=0;
+
+  if(kw){
+    ['social','toeic'].forEach(t=>{
+      const list = DATA.filter(d=>d.tab===t).filter(matches);
+      if(!list.length) return;
+      shown += list.length;
+      html += `<h2>${TABNAME[t]}｜${list.length} 句</h2><div class="scene">${list.map(itemHTML).join('')}</div>`;
+    });
+    if(!html) html=`<div class="empty"><b>找不到「${esc(kw)}」</b>換個關鍵字，或按「全部」回到完整清單。</div>`;
+    main.innerHTML=html;
+    meta.textContent = `搜尋「${kw}」共 ${shown} 句（兩區一起找）`;
+    applyQuiz(); bindItems();
+    return;
+  }
+
+  const list = SCENES[tab];
+
+  if(scene==='lead'){
+    main.innerHTML = LEAD[tab];
+    meta.textContent = `${TABNAME[tab]}｜重點提示`;
+    applyQuiz(); bindItems(); return;
+  }
+  if(scene==='tail'){
+    main.innerHTML = TAIL[tab];
+    meta.textContent = `${TABNAME[tab]}｜${tab==='social'?'常踩的坑':'考前怎麼用'}`;
+    applyQuiz(); bindItems(); return;
+  }
+
+  if(scene==='all'){
+    html += `<h2>${tab==='social'?'先記這個：Small Talk 的三步公式':'目標與練法'}</h2>` + LEAD[tab];
+    list.forEach((s,i)=>{
+      const items = DATA.filter(d=>d.tab===tab && d.s===i).filter(matches);
+      if(!items.length && onlyFav) return;
+      html += `<h2>${s.t}</h2><p class="note">${s.note}</p>`;
+      html += `<div class="scene">${items.length?items.map(itemHTML).join(''):'<div class="empty">這區沒有符合的句子</div>'}</div>`;
+      shown += items.length;
+      total += DATA.filter(d=>d.tab===tab && d.s===i).length;
+    });
+    html += TAIL[tab];
+  } else {
+    const i=parseInt(scene,10), s=list[i];
+    const items = DATA.filter(d=>d.tab===tab && d.s===i).filter(matches);
+    html += `<h2>${s.t}</h2><p class="note">${s.note}</p>`;
+    html += `<div class="scene">${items.length?items.map(itemHTML).join(''):'<div class="empty"><b>沒有符合的句子</b>換個關鍵字試試</div>'}</div>`;
+    shown=items.length;
+    total=DATA.filter(d=>d.tab===tab && d.s===i).length;
+  }
+
+  main.innerHTML=html;
+  meta.textContent = `顯示 ${shown} 句${onlyFav?'（僅收藏）':''}｜${TABNAME[tab]}共 ${total} 句・全站 ${DATA.length} 句`;
+  applyQuiz(); bindItems();
+}
+
+function renderAll(){
+  let html='', n=0;
+  ['social','toeic'].forEach((t,ti)=>{
+    const second = ti>0;
+    const c = second? '#2f6f6b' : '#8a5a2b';
+    html += `<h2 style="margin-top:${second?'54px':'30px'};border-left-color:${c};font-size:22px">${TABNAME[t]}　共 100 句</h2>`;
+    html += LEAD[t];
+    SCENES[t].forEach((s,i)=>{
+      const items = DATA.filter(d=>d.tab===t && d.s===i);
+      n += items.length;
+      html += `<h2>${s.t}</h2><p class="note">${s.note}</p>`;
+      html += `<div class="scene">${items.map(itemHTML).join('')}</div>`;
+    });
+    html += TAIL[t];
+  });
+  main.innerHTML = html;
+  meta.textContent = `完整列印版｜兩區共 ${n} 句`;
+  bindItems();
+}
+
+function applyQuiz(){
+  document.body.classList.toggle('quiz', quiz);
+  quizBtn.classList.toggle('on', quiz);
+}
+quizBtn.onclick=()=>{
+  quiz=!quiz;
+  try{ localStorage.setItem(QKEY, quiz?'1':'0'); }catch(e){}
+  if(quiz) main.querySelectorAll('.item.open').forEach(x=>x.classList.remove('open'));
+  applyQuiz();
+  if(quiz) bindItems();
+};
+
+function bindItems(){
+  main.querySelectorAll('.say').forEach(b=>{ b.onclick=()=>speak(b.dataset.en,b); });
+  main.querySelectorAll('.star').forEach(b=>{
+    b.onclick=()=>{
+      const v=b.dataset.en, i=favs.indexOf(v);
+      if(i>=0) favs.splice(i,1); else favs.push(v);
+      try{ localStorage.setItem(KEY,JSON.stringify(favs)); }catch(e){}
+      updateFavBtn(); render();
+    };
+  });
+  if(quiz){
+    main.querySelectorAll('.item').forEach(it=>{
+      const t=it.querySelector('.txt');
+      if(t) t.onclick=()=>it.classList.toggle('open');
+    });
+  }
+}
+
+let cur=null;
+function speak(text,btn){
+  if(!('speechSynthesis' in window)){ btn.disabled=true; btn.textContent='✕'; return; }
+  speechSynthesis.cancel();
+  document.querySelectorAll('.say.playing').forEach(x=>{x.classList.remove('playing');x.textContent='🔊';});
+  if(cur===text){ cur=null; return; }
+  const u=new SpeechSynthesisUtterance(text);
+  u.lang='en-US'; u.rate=.9;
+  u.onstart=()=>{btn.classList.add('playing');btn.textContent='■';};
+  u.onend=()=>{btn.classList.remove('playing');btn.textContent='🔊';cur=null;};
+  u.onerror=()=>{btn.classList.remove('playing');btn.textContent='🔊';cur=null;};
+  cur=text;
+  speechSynthesis.speak(u);
+}
+window.addEventListener('beforeunload',()=>{ if('speechSynthesis' in window) speechSynthesis.cancel(); });
+
+document.querySelectorAll('.tab').forEach(t=>{
+  t.onclick=()=>{
+    if(tab===t.dataset.tab) return;
+    tab=t.dataset.tab;
+    scene='all'; kw=''; q.value=''; clr.classList.remove('on');
+    document.body.dataset.tab=tab;
+    document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on', x.dataset.tab===tab));
+    buildChips(); render();
+    window.scrollTo({top:0,behavior:'smooth'});
+  };
+});
+
+function updateFavBtn(){
+  favBtn.classList.toggle('on',onlyFav);
+  favCnt.textContent = favs.length? ` ${favs.length}` : '';
+}
+favBtn.onclick=()=>{ onlyFav=!onlyFav; updateFavBtn(); render(); };
+
+q.addEventListener('input',()=>{
+  kw=q.value.trim();
+  clr.classList.toggle('on',!!kw);
+  if(kw){ onlyFav=false; updateFavBtn(); }
+  render();
+});
+clr.onclick=()=>{ q.value=''; kw=''; clr.classList.remove('on'); render(); q.focus(); };
+
+document.getElementById('printBtn').onclick=()=>window.print();
+
+themeBtn.onclick=()=>{
+  const dark=document.documentElement.getAttribute('data-theme')==='dark';
+  if(dark){ document.documentElement.removeAttribute('data-theme'); themeBtn.textContent='🌙 夜間'; try{localStorage.setItem(TKEY,'light');}catch(e){} }
+  else{ document.documentElement.setAttribute('data-theme','dark'); themeBtn.textContent='☀️ 日間'; try{localStorage.setItem(TKEY,'dark');}catch(e){} }
+};
+try{
+  if(localStorage.getItem(TKEY)==='dark'){
+    document.documentElement.setAttribute('data-theme','dark'); themeBtn.textContent='☀️ 日間';
+  }
+}catch(e){}
+
+buildChips(); updateFavBtn(); applyQuiz(); render();
+</script>
+</body>
+</html>
