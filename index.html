@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>英語練習手冊｜日常社交 + 多益商務</title>
-<meta name="description" content="兩區並存的英語練習手冊：日常社交 Small Talk 100 句、多益商務情境 100 句。可搜尋、可朗讀、可遮蔽自測、可收藏。">
+<meta name="description" content="兩區並存的英語練習手冊：日常社交 Small Talk 100 句、多益商務情境 100 句，每句附示範回應。可搜尋、可朗讀、可遮蔽自測、可收藏。">
 <style>
   :root{
     --bg:#f7f6f3; --card:#ffffff; --ink:#1f1d1a; --ink-soft:#5c5852;
@@ -117,6 +117,17 @@
   .tip{color:var(--ink-soft);font-size:13.5px;margin-top:4px;}
   .tip b{color:var(--accent);font-weight:600;}
   body[data-tab="toeic"] .tip b{color:var(--tab2);}
+  .re{
+    margin-top:9px;padding:7px 12px 9px;border-radius:0 10px 10px 0;
+    border-left:3px solid var(--accent);background:var(--accent-soft);
+  }
+  body[data-tab="toeic"] .re{border-left-color:var(--tab2);background:var(--tab2-soft);}
+  .rehead{display:flex;align-items:center;gap:7px;margin-bottom:3px;}
+  .relab{font-size:11.5px;font-weight:600;letter-spacing:.6px;color:var(--accent);}
+  body[data-tab="toeic"] .relab{color:var(--tab2);}
+  .re .say{width:22px;height:22px;font-size:11px;border-radius:6px;margin-top:0;}
+  .reen{color:var(--en);font-size:15.5px;font-weight:600;line-height:1.45;}
+  .rezh{color:var(--ink-soft);font-size:13.5px;margin-top:2px;}
   .star{
     flex:0 0 auto;border:0;background:transparent;cursor:pointer;font-size:19px;
     padding:2px 4px;line-height:1;color:var(--star-off);transition:.15s;margin-top:2px;
@@ -142,8 +153,9 @@
 
   /* 自測模式 */
   .quiz .txt{cursor:pointer;}
-  .quiz .zh, .quiz .tip{filter:blur(6px);user-select:none;transition:filter .18s;}
-  .quiz .item.open .zh, .quiz .item.open .tip{filter:none;}
+  .quiz .zh, .quiz .tip, .quiz .reen, .quiz .rezh{filter:blur(6px);user-select:none;transition:filter .18s;}
+  .quiz .item.open .zh, .quiz .item.open .tip,
+  .quiz .item.open .reen, .quiz .item.open .rezh{filter:none;}
   .quiz .txt::after{
     content:"點一下看答案";display:block;font-size:12.5px;color:var(--ink-soft);
     margin-top:3px;letter-spacing:.5px;
@@ -179,7 +191,8 @@
     .item{break-inside:avoid;}
     h2{break-after:avoid;}
     footer{display:none;}
-    .quiz .zh,.quiz .tip{filter:none !important;}
+    .quiz .zh,.quiz .tip,.quiz .reen,.quiz .rezh{filter:none !important;}
+    .re{break-inside:avoid;}
     .quiz .txt::after{content:"" !important;}
   }
 </style>
@@ -189,7 +202,7 @@
 
 <header>
   <h1>英語練習手冊</h1>
-  <div class="sub">日常社交 + 多益商務，共 200 句・可搜尋・可朗讀・可遮蔽自測・可收藏</div>
+  <div class="sub">日常社交 + 多益商務，共 200 句・每句附「對方回」・可搜尋、朗讀、遮蔽自測、收藏</div>
 </header>
 
 <div class="tabs">
@@ -225,7 +238,7 @@
       </select>
     </label>
     <button class="btn" id="tryBtn" title="用目前設定試聽一句">試聽</button>
-    <span class="vtip">點句子左邊的 🔊 即可朗讀</span>
+    <span class="vtip">點句子的 🔊 朗讀；「對方回」旁邊的 🔊 聽對方怎麼回</span>
   </div>
   <div class="chips" id="chips"></div>
 </div>
@@ -271,226 +284,226 @@ const SCENES = {
 
 const DATA = [
 /* ── 日常社交 ── */
-{tab:'social',s:0,en:"Hi, I don't think we've met — I'm Jump.",zh:"你好，我們應該還沒見過——我是 Jump。",tip:"最穩的起手式。[[接：]] What about you — how do you know the host?"},
-{tab:'social',s:0,en:"Is this your first time here?",zh:"你第一次來這裡嗎？",tip:"活動、會議、城市都通用。"},
-{tab:'social',s:0,en:"What brings you here today?",zh:"今天什麼風把你吹來的？",tip:"比「What do you do?」柔軟，不會像在盤問。"},
-{tab:'social',s:0,en:"How do you know [Name]?",zh:"你怎麼認識＿＿的？",tip:"有共同認識的人時最好用。"},
-{tab:'social',s:0,en:"I love your jacket — where did you get it?",zh:"你這件外套好看，哪裡買的？",tip:"讚美物件不讚美身體，比較不失禮。"},
-{tab:'social',s:0,en:"That coffee smells amazing. Is it from downstairs?",zh:"這咖啡好香，是樓下買的嗎？",tip:"就地取材，完全不用動腦。"},
-{tab:'social',s:0,en:"Have you been to one of these before?",zh:"這種場合你之前來過嗎？",tip:"把球丟給對方，壓力最小。"},
-{tab:'social',s:0,en:"Looks like we're both early.",zh:"看來我們都來早了。",tip:"會議開始前的空檔最好用。"},
-{tab:'social',s:0,en:"Mind if I join you?",zh:"介意我坐這邊嗎？",tip:"加入別人談話前的一句禮貌。"},
-{tab:'social',s:0,en:"I'm terrible at these things, but — how's your day going?",zh:"我不太會這種場合，不過——你今天還好嗎？",tip:"自嘲反而讓氣氛變真，母語者常用。"},
+{tab:'social',s:0,en:"Hi, I don't think we've met — I'm Jump.",zh:"你好，我們應該還沒見過——我是 Jump。",tip:"最穩的起手式。[[接：]] What about you — how do you know the host?",re:"Oh hi, I'm Sarah. Nice to meet you — are you with the Taipei team?",rezh:"你好，我是 Sarah，很高興認識你——你是台北團隊的嗎？"},
+{tab:'social',s:0,en:"Is this your first time here?",zh:"你第一次來這裡嗎？",tip:"活動、會議、城市都通用。",re:"It is, actually. A colleague recommended it, so I figured I'd give it a try.",rezh:"其實是第一次。同事推薦的，想說來看看。"},
+{tab:'social',s:0,en:"What brings you here today?",zh:"今天什麼風把你吹來的？",tip:"比「What do you do?」柔軟，不會像在盤問。",re:"Mostly the keynote. I've been following this speaker for a while.",rezh:"主要是來聽專題演講，我關注這位講者很久了。"},
+{tab:'social',s:0,en:"How do you know [Name]?",zh:"你怎麼認識＿＿的？",tip:"有共同認識的人時最好用。",re:"We used to work together at my last company. How about you?",rezh:"我們上一間公司是同事。你呢？"},
+{tab:'social',s:0,en:"I love your jacket — where did you get it?",zh:"你這件外套好看，哪裡買的？",tip:"讚美物件不讚美身體，比較不失禮。",re:"Thanks! I got it at a small shop in Tainan, actually.",rezh:"謝謝！其實是在台南一間小店買的。"},
+{tab:'social',s:0,en:"That coffee smells amazing. Is it from downstairs?",zh:"這咖啡好香，是樓下買的嗎？",tip:"就地取材，完全不用動腦。",re:"It is. They just opened last week — you should try the latte.",rezh:"對，他們上週才開的，你可以試試拿鐵。"},
+{tab:'social',s:0,en:"Have you been to one of these before?",zh:"這種場合你之前來過嗎？",tip:"把球丟給對方，壓力最小。",re:"A couple of times. They're usually pretty relaxed.",rezh:"來過幾次，通常都滿輕鬆的。"},
+{tab:'social',s:0,en:"Looks like we're both early.",zh:"看來我們都來早了。",tip:"會議開始前的空檔最好用。",re:"Story of my life. At least we can grab a good seat.",rezh:"我每次都這樣。至少還能挑個好位子。"},
+{tab:'social',s:0,en:"Mind if I join you?",zh:"介意我坐這邊嗎？",tip:"加入別人談話前的一句禮貌。",re:"Not at all, please. There's plenty of room.",rezh:"當然不會，請坐，位子很多。"},
+{tab:'social',s:0,en:"I'm terrible at these things, but — how's your day going?",zh:"我不太會這種場合，不過——你今天還好嗎？",tip:"自嘲反而讓氣氛變真，母語者常用。",re:"Same here, honestly. But it's been a pretty good day so far.",rezh:"老實說我也是。不過今天到目前還不錯。"},
 
-{tab:'social',s:1,en:"Heading up or down?",zh:"上樓還下樓？",tip:"電梯裡最短的安全句。"},
-{tab:'social',s:1,en:"This elevator is faster than usual today.",zh:"這電梯今天比平常快。",tip:"沒內容也沒關係，重點是釋出善意。"},
-{tab:'social',s:1,en:"Busy morning?",zh:"早上很忙嗎？",tip:"疑問句上揚即可，對方一句話就能接。"},
-{tab:'social',s:1,en:"Back-to-back meetings?",zh:"一場接一場開會嗎？",tip:"看到對方抱著筆電衝來衝去時用。"},
-{tab:'social',s:1,en:"Long line today.",zh:"今天排得真長。",tip:"陳述句比問句更自然，不必等回答。"},
-{tab:'social',s:1,en:"Is this room always this cold, or is it just me?",zh:"這間一直這麼冷，還是只有我覺得？",tip:"小抱怨是很好的破冰材料。"},
-{tab:'social',s:1,en:"Did you get caught in the rain earlier?",zh:"你剛剛有淋到雨嗎？",tip:"天氣一定要配一個具體細節，才不像背句型。"},
-{tab:'social',s:1,en:"How was your commute today?",zh:"今天通勤還順嗎？",tip:"台灣人常忘：通勤是超級安全的話題。"},
-{tab:'social',s:1,en:"You're here early too.",zh:"你也這麼早。",tip:"尋找共同處，很快能拉近。"},
-{tab:'social',s:1,en:"Have a good one!",zh:"祝你順心！",tip:"30 秒對話的標準收尾，最實用的一句。"},
+{tab:'social',s:1,en:"Heading up or down?",zh:"上樓還下樓？",tip:"電梯裡最短的安全句。",re:"Up — the eleventh floor. You?",rezh:"上樓，十一樓。你呢？"},
+{tab:'social',s:1,en:"This elevator is faster than usual today.",zh:"這電梯今天比平常快。",tip:"沒內容也沒關係，重點是釋出善意。",re:"Right? Maybe everyone's still stuck in meetings.",rezh:"對吧？可能大家還卡在會議裡。"},
+{tab:'social',s:1,en:"Busy morning?",zh:"早上很忙嗎？",tip:"疑問句上揚即可，對方一句話就能接。",re:"A little crazy, actually. Back-to-back calls until noon.",rezh:"有點忙，一路講電話講到中午。"},
+{tab:'social',s:1,en:"Back-to-back meetings?",zh:"一場接一場開會嗎？",tip:"看到對方抱著筆電衝來衝去時用。",re:"You have no idea. I haven't even had lunch yet.",rezh:"你很難想像，我連午餐都還沒吃。"},
+{tab:'social',s:1,en:"Long line today.",zh:"今天排得真長。",tip:"陳述句比問句更自然，不必等回答。",re:"Tell me about it. I've been standing here for ten minutes.",rezh:"別提了，我在這站十分鐘了。"},
+{tab:'social',s:1,en:"Is this room always this cold, or is it just me?",zh:"這間一直這麼冷，還是只有我覺得？",tip:"小抱怨是很好的破冰材料。",re:"It's not just you. I bring a jacket every single time.",rezh:"不只你，我每次都帶外套。"},
+{tab:'social',s:1,en:"Did you get caught in the rain earlier?",zh:"你剛剛有淋到雨嗎？",tip:"天氣一定要配一個具體細節，才不像背句型。",re:"I did. My shoes are still wet.",rezh:"有啊，鞋子到現在還濕的。"},
+{tab:'social',s:1,en:"How was your commute today?",zh:"今天通勤還順嗎？",tip:"台灣人常忘：通勤是超級安全的話題。",re:"Not bad — the MRT was surprisingly empty today.",rezh:"還不錯，捷運今天意外地空。"},
+{tab:'social',s:1,en:"You're here early too.",zh:"你也這麼早。",tip:"尋找共同處，很快能拉近。",re:"Yeah, I wanted to beat the traffic. Guess it worked.",rezh:"對啊，想避開車潮，看來有用。"},
+{tab:'social',s:1,en:"Have a good one!",zh:"祝你順心！",tip:"30 秒對話的標準收尾，最實用的一句。",re:"You too — see you around.",rezh:"你也是，再見。"},
 
-{tab:'social',s:2,en:"How's your week been so far?",zh:"這週到目前還順嗎？",tip:"「How are you?」的升級版，對方比較有得答。"},
-{tab:'social',s:2,en:"How's the [project] coming along?",zh:"那個專案進行得如何？",tip:"已知對方在做什麼時，比泛問更有誠意。"},
-{tab:'social',s:2,en:"Anything exciting on your plate this week?",zh:"這週手上有什麼特別的事嗎？",tip:"on your plate 是很道地的說法。"},
-{tab:'social',s:2,en:"Did that client call go okay?",zh:"那通客戶電話還順利嗎？",tip:"表示你有在注意對方的工作，很加分。"},
-{tab:'social',s:2,en:"How are you finding the conference so far?",zh:"這場研討會你目前覺得如何？",tip:"How are you finding... 是英式很常用的問法。"},
-{tab:'social',s:2,en:"Which session did you like the most?",zh:"你最喜歡哪一場？",tip:"容易引出真正對話。"},
-{tab:'social',s:2,en:"Shall we get started?",zh:"我們開始吧？",tip:"從閒聊切回正題的萬用句。"},
-{tab:'social',s:2,en:"Before we jump in — how was everyone's weekend?",zh:"開始之前，大家週末過得如何？",tip:"主持會議時暖場用。"},
-{tab:'social',s:2,en:"Good to finally put a face to the name.",zh:"終於見到本人了。",tip:"郵件往來很久終於見面時，非常自然。"},
-{tab:'social',s:2,en:"Thanks for making the time — I know you're busy.",zh:"謝謝你撥空，我知道你很忙。",tip:"結束時說，體貼感很強。"},
+{tab:'social',s:2,en:"How's your week been so far?",zh:"這週到目前還順嗎？",tip:"「How are you?」的升級版，對方比較有得答。",re:"Busy, but the good kind of busy. How about yours?",rezh:"忙，但是好的那種忙。你呢？"},
+{tab:'social',s:2,en:"How's the [project] coming along?",zh:"那個專案進行得如何？",tip:"已知對方在做什麼時，比泛問更有誠意。",re:"Almost there. We're just waiting on the final approval.",rezh:"差不多了，就在等最後簽核。"},
+{tab:'social',s:2,en:"Anything exciting on your plate this week?",zh:"這週手上有什麼特別的事嗎？",tip:"on your plate 是很道地的說法。",re:"We're kicking off a new campaign. It's been fun so far.",rezh:"我們要啟動一個新專案，目前還滿有趣的。"},
+{tab:'social',s:2,en:"Did that client call go okay?",zh:"那通客戶電話還順利嗎？",tip:"表示你有在注意對方的工作，很加分。",re:"Better than expected — they signed off on it.",rezh:"比預期好，他們同意了。"},
+{tab:'social',s:2,en:"How are you finding the conference so far?",zh:"這場研討會你目前覺得如何？",tip:"How are you finding... 是英式很常用的問法。",re:"Really useful. The afternoon session was the highlight.",rezh:"滿有收穫的，下午那場最精彩。"},
+{tab:'social',s:2,en:"Which session did you like the most?",zh:"你最喜歡哪一場？",tip:"容易引出真正對話。",re:"The one on pricing. It actually answered a lot of my questions.",rezh:"定價那一場，剛好解答了我很多問題。"},
+{tab:'social',s:2,en:"Shall we get started?",zh:"我們開始吧？",tip:"從閒聊切回正題的萬用句。",re:"Sure, let's do it. I think everyone's here now.",rezh:"好啊，開始吧，人應該都到了。"},
+{tab:'social',s:2,en:"Before we jump in — how was everyone's weekend?",zh:"開始之前，大家週末過得如何？",tip:"主持會議時暖場用。",re:"Pretty quiet. I finally caught up on sleep.",rezh:"滿平靜的，終於補到眠了。"},
+{tab:'social',s:2,en:"Good to finally put a face to the name.",zh:"終於見到本人了。",tip:"郵件往來很久終於見面時，非常自然。",re:"Likewise. We've been emailing for months.",rezh:"我也是，我們通信好幾個月了。"},
+{tab:'social',s:2,en:"Thanks for making the time — I know you're busy.",zh:"謝謝你撥空，我知道你很忙。",tip:"結束時說，體貼感很強。",re:"Of course. Thanks for coming all the way here.",rezh:"應該的，謝謝你特地跑一趟。"},
 
-{tab:'social',s:3,en:"Did you have a good flight?",zh:"飛機還順吧？",tip:"接機第一句，永遠安全。"},
-{tab:'social',s:3,en:"Is this your first time in Taiwan?",zh:"第一次來台灣嗎？",tip:"對方答 yes 就順勢介紹；答 no 就問之前來做什麼。"},
-{tab:'social',s:3,en:"How long are you staying?",zh:"這次停留幾天？",tip:"問行程不問私事，很得體。"},
-{tab:'social',s:3,en:"Have you tried the food here yet?",zh:"這裡的食物你吃過了嗎？",tip:"台灣人最好發揮的話題，最容易聊開。"},
-{tab:'social',s:3,en:"Let me know if you need anything at all.",zh:"有任何需要都跟我說。",tip:"接待方的標準款待句。"},
-{tab:'social',s:3,en:"Can I get you something to drink?",zh:"要不要喝點什麼？",tip:"接待的基本動作。"},
-{tab:'social',s:3,en:"How does it compare to back home?",zh:"跟你家鄉比起來如何？",tip:"很棒的第二層問題，能聊出文化差異。"},
-{tab:'social',s:3,en:"Is there anything you'd like to see while you're here?",zh:"這趟有沒有特別想去看的地方？",tip:"表現地主之誼。"},
-{tab:'social',s:3,en:"Let me show you around a bit.",zh:"我帶你稍微看一下環境。",tip:"自然帶動動線。"},
-{tab:'social',s:3,en:"Hope you enjoy the rest of your stay.",zh:"祝你這趟剩餘的行程愉快。",tip:"送客收尾。"},
+{tab:'social',s:3,en:"Did you have a good flight?",zh:"飛機還順吧？",tip:"接機第一句，永遠安全。",re:"Smooth, thanks. We even landed early.",rezh:"很順，謝謝，還提早落地。"},
+{tab:'social',s:3,en:"Is this your first time in Taiwan?",zh:"第一次來台灣嗎？",tip:"對方答 yes 就順勢介紹；答 no 就問之前來做什麼。",re:"It is. I've wanted to come for years.",rezh:"是第一次，我想來好幾年了。"},
+{tab:'social',s:3,en:"How long are you staying?",zh:"這次停留幾天？",tip:"問行程不問私事，很得體。",re:"Just four days this time. Hopefully longer next trip.",rezh:"這次只待四天，希望下次能久一點。"},
+{tab:'social',s:3,en:"Have you tried the food here yet?",zh:"這裡的食物你吃過了嗎？",tip:"台灣人最好發揮的話題，最容易聊開。",re:"Only the hotel breakfast. I'm saving room for tonight.",rezh:"只吃了飯店早餐，留點胃給晚上。"},
+{tab:'social',s:3,en:"Let me know if you need anything at all.",zh:"有任何需要都跟我說。",tip:"接待方的標準款待句。",re:"Thanks, I appreciate it. I might need help with a SIM card.",rezh:"謝謝，我可能需要幫忙處理 SIM 卡。"},
+{tab:'social',s:3,en:"Can I get you something to drink?",zh:"要不要喝點什麼？",tip:"接待的基本動作。",re:"Water would be great, thanks.",rezh:"水就好，謝謝。"},
+{tab:'social',s:3,en:"How does it compare to back home?",zh:"跟你家鄉比起來如何？",tip:"很棒的第二層問題，能聊出文化差異。",re:"Very different — everything's more convenient here, honestly.",rezh:"差滿多的，老實說這裡什麼都方便。"},
+{tab:'social',s:3,en:"Is there anything you'd like to see while you're here?",zh:"這趟有沒有特別想去看的地方？",tip:"表現地主之誼。",re:"I'd love to see a night market, if there's time.",rezh:"如果有時間，我想去逛夜市。"},
+{tab:'social',s:3,en:"Let me show you around a bit.",zh:"我帶你稍微看一下環境。",tip:"自然帶動動線。",re:"That'd be great. Lead the way.",rezh:"太好了，你帶路。"},
+{tab:'social',s:3,en:"Hope you enjoy the rest of your stay.",zh:"祝你這趟剩餘的行程愉快。",tip:"送客收尾。",re:"Thank you — you've been really kind to me.",rezh:"謝謝你，你真的對我很好。"},
 
-{tab:'social',s:4,en:"Have you been here before?",zh:"這家你來過嗎？",tip:"坐下來第一句。"},
-{tab:'social',s:4,en:"What would you recommend?",zh:"有什麼推薦的嗎？",tip:"把決定權給對方，很受用。"},
-{tab:'social',s:4,en:"This is a local specialty — you have to try it.",zh:"這是當地特色，你一定要試試。",tip:"介紹台灣菜時用。"},
-{tab:'social',s:4,en:"Are you adventurous with food?",zh:"吃東西你敢嘗試嗎？",tip:"比「Do you like...?」有趣得多。"},
-{tab:'social',s:4,en:"How's your dish?",zh:"你那道如何？",tip:"上菜後的自然話題。"},
-{tab:'social',s:4,en:"Do you cook at all?",zh:"你自己會下廚嗎？",tip:"食物話題往下延伸的好句。"},
-{tab:'social',s:4,en:"Let me top up your glass.",zh:"我幫你添一下。",tip:"斟酒添茶的道地說法。"},
-{tab:'social',s:4,en:"I'll let you get back to your meal.",zh:"不打擾你用餐了。",tip:"打擾後的漂亮退場。"},
-{tab:'social',s:4,en:"Shall we get the bill?",zh:"我們買單好嗎？",tip:"英式用 bill，美式常用 check。"},
-{tab:'social',s:4,en:"That was a great meal — thanks for the recommendation.",zh:"這頓很棒，謝謝你推薦。",tip:"收尾感謝，留下好印象。"},
+{tab:'social',s:4,en:"Have you been here before?",zh:"這家你來過嗎？",tip:"坐下來第一句。",re:"Once, but it was years ago. What do you usually get?",rezh:"來過一次，不過是好幾年前。你都點什麼？"},
+{tab:'social',s:4,en:"What would you recommend?",zh:"有什麼推薦的嗎？",tip:"把決定權給對方，很受用。",re:"The beef noodles are what they're known for.",rezh:"他們的牛肉麵最有名。"},
+{tab:'social',s:4,en:"This is a local specialty — you have to try it.",zh:"這是當地特色，你一定要試試。",tip:"介紹台灣菜時用。",re:"Then I definitely will. What's in it?",rezh:"那我一定要試。裡面是什麼？"},
+{tab:'social',s:4,en:"Are you adventurous with food?",zh:"吃東西你敢嘗試嗎？",tip:"比「Do you like...?」有趣得多。",re:"Usually, yes. I'll try anything once.",rezh:"通常是，什麼都願意試一次。"},
+{tab:'social',s:4,en:"How's your dish?",zh:"你那道如何？",tip:"上菜後的自然話題。",re:"Really good. Want a bite?",rezh:"很好吃，要不要嚐一口？"},
+{tab:'social',s:4,en:"Do you cook at all?",zh:"你自己會下廚嗎？",tip:"食物話題往下延伸的好句。",re:"A little — mostly simple stuff. You?",rezh:"會一點，都是簡單的。你呢？"},
+{tab:'social',s:4,en:"Let me top up your glass.",zh:"我幫你添一下。",tip:"斟酒添茶的道地說法。",re:"Thanks, that's kind of you.",rezh:"謝謝，你人真好。"},
+{tab:'social',s:4,en:"I'll let you get back to your meal.",zh:"不打擾你用餐了。",tip:"打擾後的漂亮退場。",re:"Thanks for stopping by — good to see you.",rezh:"謝謝你過來，很高興見到你。"},
+{tab:'social',s:4,en:"Shall we get the bill?",zh:"我們買單好嗎？",tip:"英式用 bill，美式常用 check。",re:"Sure. Let's split it, though.",rezh:"好啊，不過我們各付各的。"},
+{tab:'social',s:4,en:"That was a great meal — thanks for the recommendation.",zh:"這頓很棒，謝謝你推薦。",tip:"收尾感謝，留下好印象。",re:"Glad you liked it. We'll have to come back next time.",rezh:"很高興你喜歡，下次再來。"},
 
-{tab:'social',s:5,en:"That was a great presentation.",zh:"你那場簡報很精采。",tip:"具體指名哪一件事，比泛泛說 good job 有力。"},
-{tab:'social',s:5,en:"I really like how you handled that.",zh:"你處理那件事的方式我很欣賞。",tip:"稱讚做法不稱讚天賦，更專業。"},
-{tab:'social',s:5,en:"You have a great eye for detail.",zh:"你對細節很有眼光。",tip:"職場讚美的高級句。"},
-{tab:'social',s:5,en:"Your English is really impressive.",zh:"你英文真好。",tip:"收到這句時不要說「No no no」。"},
-{tab:'social',s:5,en:"Thanks — I've been working on it.",zh:"謝啦，我一直在練。",tip:"[[回應稱讚的正解：]]謝過加一句補充，不要過度否認。"},
-{tab:'social',s:5,en:"That's very kind of you to say.",zh:"你這麼說真好。",tip:"不知道怎麼回時的安全牌。"},
-{tab:'social',s:5,en:"Thanks, that means a lot.",zh:"謝謝，這對我意義很大。",tip:"來自前輩或客戶時用。"},
-{tab:'social',s:5,en:"It was a team effort, honestly.",zh:"說真的，那是團隊的功勞。",tip:"謙虛但不否定，比「沒有啦」得體。"},
-{tab:'social',s:5,en:"I love your approach to this.",zh:"我很喜歡你處理這件事的角度。",tip:"對同儕用，不會顯得像在上對下。"},
-{tab:'social',s:5,en:"You made that look easy.",zh:"你做起來好像很輕鬆。",tip:"輕鬆場合的讚美，很討喜。"},
+{tab:'social',s:5,en:"That was a great presentation.",zh:"你那場簡報很精采。",tip:"具體指名哪一件事，比泛泛說 good job 有力。",re:"Thank you — I wasn't sure how it would land.",rezh:"謝謝，我原本不太確定大家反應會怎樣。"},
+{tab:'social',s:5,en:"I really like how you handled that.",zh:"你處理那件事的方式我很欣賞。",tip:"稱讚做法不稱讚天賦，更專業。",re:"That means a lot, coming from you.",rezh:"你這樣說，對我意義很大。"},
+{tab:'social',s:5,en:"You have a great eye for detail.",zh:"你對細節很有眼光。",tip:"職場讚美的高級句。",re:"Thanks. Noticing details is kind of my job.",rezh:"謝謝。注意細節算是我的工作。"},
+{tab:'social',s:5,en:"Your English is really impressive.",zh:"你英文真好。",tip:"收到這句時不要說「No no no」。",re:"That's nice of you to say. I've been practicing.",rezh:"你這樣說真好，我一直在練。"},
+{tab:'social',s:5,en:"Thanks — I've been working on it.",zh:"謝啦，我一直在練。",tip:"[[回應稱讚的正解：]]謝過加一句補充，不要過度否認。",re:"It shows. Keep it up.",rezh:"看得出來，繼續加油。"},
+{tab:'social',s:5,en:"That's very kind of you to say.",zh:"你這麼說真好。",tip:"不知道怎麼回時的安全牌。",re:"I mean it — you earned it.",rezh:"我是認真的，你值得。"},
+{tab:'social',s:5,en:"Thanks, that means a lot.",zh:"謝謝，這對我意義很大。",tip:"來自前輩或客戶時用。",re:"Anytime. You deserve the credit.",rezh:"不客氣，這是你應得的。"},
+{tab:'social',s:5,en:"It was a team effort, honestly.",zh:"說真的，那是團隊的功勞。",tip:"謙虛但不否定，比「沒有啦」得體。",re:"Even so, you led it. Take the credit.",rezh:"就算是這樣，是你帶的，功勞就收下吧。"},
+{tab:'social',s:5,en:"I love your approach to this.",zh:"我很喜歡你處理這件事的角度。",tip:"對同儕用，不會顯得像在上對下。",re:"Thanks — I borrowed half of it from you, actually.",rezh:"謝謝，其實有一半是跟你學的。"},
+{tab:'social',s:5,en:"You made that look easy.",zh:"你做起來好像很輕鬆。",tip:"輕鬆場合的讚美，很討喜。",re:"Trust me, it wasn't. But thanks.",rezh:"相信我，一點都不輕鬆。不過謝謝。"},
 
-{tab:'social',s:6,en:"Oh really? How was that?",zh:"真的嗎？如何啊？",tip:"萬能追問第一句，幾乎任何回答後都能接。"},
-{tab:'social',s:6,en:"Tell me more about that.",zh:"再多說一點。",tip:"表現真有興趣，對方會很樂意講。"},
-{tab:'social',s:6,en:"What happened after that?",zh:"後來呢？",tip:"故事型回答用這句最好。"},
-{tab:'social',s:6,en:"That sounds interesting — where did you go?",zh:"聽起來不錯，你們去哪裡？",tip:"[[先回應再追問]]，這才是自然對話。"},
-{tab:'social',s:6,en:"I know exactly what you mean.",zh:"我完全懂你在說什麼。",tip:"建立共鳴最有效。"},
-{tab:'social',s:6,en:"Same here — I had a similar experience.",zh:"我也是，我有過類似經驗。",tip:"分享一點自己的，對話才會平衡。"},
-{tab:'social',s:6,en:"Wait, how did you get into that?",zh:"等等，你怎麼開始做這個的？",tip:"問「怎麼開始的」永遠比問「做什麼」好聊。"},
-{tab:'social',s:6,en:"No way. Seriously?",zh:"不會吧，認真的？",tip:"口語感強，熟一點的場合用。"},
-{tab:'social',s:6,en:"That's a good point — I hadn't thought of it that way.",zh:"這點很好，我沒這樣想過。",tip:"商務場合的接話，顯得你有在聽。"},
-{tab:'social',s:6,en:"What was the highlight for you?",zh:"對你來說最精采的是哪部分？",tip:"把開放式問題收斂一點，比較好答。"},
+{tab:'social',s:6,en:"Oh really? How was that?",zh:"真的嗎？如何啊？",tip:"萬能追問第一句，幾乎任何回答後都能接。",re:"Surprisingly fun. I'd do it again.",rezh:"意外地好玩，我還會想再去。"},
+{tab:'social',s:6,en:"Tell me more about that.",zh:"再多說一點。",tip:"表現真有興趣，對方會很樂意講。",re:"Well, it started as a side project, and it kind of took off.",rezh:"一開始只是副業，後來就越做越大了。"},
+{tab:'social',s:6,en:"What happened after that?",zh:"後來呢？",tip:"故事型回答用這句最好。",re:"We ended up moving the whole team over there.",rezh:"最後我們把整個團隊都搬過去了。"},
+{tab:'social',s:6,en:"That sounds interesting — where did you go?",zh:"聽起來不錯，你們去哪裡？",tip:"[[先回應再追問]]，這才是自然對話。",re:"We went to Hualien, mostly for the hiking.",rezh:"我們去花蓮，主要是去爬山。"},
+{tab:'social',s:6,en:"I know exactly what you mean.",zh:"我完全懂你在說什麼。",tip:"建立共鳴最有效。",re:"Right? It's good to hear someone gets it.",rezh:"對吧？有人懂真好。"},
+{tab:'social',s:6,en:"Same here — I had a similar experience.",zh:"我也是，我有過類似經驗。",tip:"分享一點自己的，對話才會平衡。",re:"Really? Tell me about yours.",rezh:"真的嗎？說說你的。"},
+{tab:'social',s:6,en:"Wait, how did you get into that?",zh:"等等，你怎麼開始做這個的？",tip:"問「怎麼開始的」永遠比問「做什麼」好聊。",re:"A friend dragged me into it, and I never looked back.",rezh:"朋友拉我進去的，後來就回不去了。"},
+{tab:'social',s:6,en:"No way. Seriously?",zh:"不會吧，認真的？",tip:"口語感強，熟一點的場合用。",re:"Seriously. I couldn't believe it either.",rezh:"真的，我自己也不敢相信。"},
+{tab:'social',s:6,en:"That's a good point — I hadn't thought of it that way.",zh:"這點很好，我沒這樣想過。",tip:"商務場合的接話，顯得你有在聽。",re:"It took me a while to see it that way, too.",rezh:"我也是過一陣子才這樣想通的。"},
+{tab:'social',s:6,en:"What was the highlight for you?",zh:"對你來說最精采的是哪部分？",tip:"把開放式問題收斂一點，比較好答。",re:"Probably the workshop. That's where I learned the most.",rezh:"應該是那場工作坊，我學到最多。"},
 
-{tab:'social',s:7,en:"Anyway — how's everything on your end?",zh:"話說回來，你那邊一切還好嗎？",tip:"卡住時的萬用跳板。"},
-{tab:'social',s:7,en:"Speaking of which, did you hear about...?",zh:"說到這個，你有聽說＿＿嗎？",tip:"從對方的關鍵字順勢轉向。"},
-{tab:'social',s:7,en:"That reminds me — have you tried...?",zh:"這讓我想到，你有試過＿＿嗎？",tip:"轉得很自然，不生硬。"},
-{tab:'social',s:7,en:"Sorry, I completely lost my train of thought.",zh:"抱歉，我剛完全斷線了。",tip:"腦袋空白時誠實講，比硬擠好。"},
-{tab:'social',s:7,en:"Let me think about that for a second.",zh:"讓我想一下。",tip:"買時間用，不會顯得卡住。"},
-{tab:'social',s:7,en:"I'm not the best person to ask, honestly.",zh:"說真的，問我不是最佳人選。",tip:"不懂的話題可以這樣卸掉。"},
-{tab:'social',s:7,en:"We'll have to agree to disagree.",zh:"這點我們就各自保留吧。",tip:"意見不合時的和緩收場，非常重要。"},
-{tab:'social',s:7,en:"Let's park that for now.",zh:"這個先放著。",tip:"會議上擱置爭議的道地說法。"},
-{tab:'social',s:7,en:"Where were we?",zh:"我們剛講到哪？",tip:"岔題後拉回來。"},
-{tab:'social',s:7,en:"Do you mind if I switch topics for a second?",zh:"介意我換個話題嗎？",tip:"要轉進正事時很有禮貌。"},
+{tab:'social',s:7,en:"Anyway — how's everything on your end?",zh:"話說回來，你那邊一切還好嗎？",tip:"卡住時的萬用跳板。",re:"Busy as always, but no complaints.",rezh:"一樣忙，不過沒什麼好抱怨的。"},
+{tab:'social',s:7,en:"Speaking of which, did you hear about...?",zh:"說到這個，你有聽說＿＿嗎？",tip:"從對方的關鍵字順勢轉向。",re:"No, what happened?",rezh:"沒有，怎麼了？"},
+{tab:'social',s:7,en:"That reminds me — have you tried...?",zh:"這讓我想到，你有試過＿＿嗎？",tip:"轉得很自然，不生硬。",re:"Not yet. Is it any good?",rezh:"還沒，那個好嗎？"},
+{tab:'social',s:7,en:"Sorry, I completely lost my train of thought.",zh:"抱歉，我剛完全斷線了。",tip:"腦袋空白時誠實講，比硬擠好。",re:"No worries, take your time.",rezh:"沒關係，慢慢想。"},
+{tab:'social',s:7,en:"Let me think about that for a second.",zh:"讓我想一下。",tip:"買時間用，不會顯得卡住。",re:"Sure, I'm not going anywhere.",rezh:"好啊，我又不會跑掉。"},
+{tab:'social',s:7,en:"I'm not the best person to ask, honestly.",zh:"說真的，問我不是最佳人選。",tip:"不懂的話題可以這樣卸掉。",re:"Fair enough. Who should I talk to?",rezh:"了解，那我該問誰？"},
+{tab:'social',s:7,en:"We'll have to agree to disagree.",zh:"這點我們就各自保留吧。",tip:"意見不合時的和緩收場，非常重要。",re:"Fair enough. Let's leave it there.",rezh:"可以，那就先這樣。"},
+{tab:'social',s:7,en:"Let's park that for now.",zh:"這個先放著。",tip:"會議上擱置爭議的道地說法。",re:"Agreed. We can pick it up next time.",rezh:"同意，下次再談。"},
+{tab:'social',s:7,en:"Where were we?",zh:"我們剛講到哪？",tip:"岔題後拉回來。",re:"You were just about to show me the numbers.",rezh:"你正要給我看數字。"},
+{tab:'social',s:7,en:"Do you mind if I switch topics for a second?",zh:"介意我換個話題嗎？",tip:"要轉進正事時很有禮貌。",re:"Go ahead — I was about to suggest the same thing.",rezh:"請說，我正想提這件事。"},
 
-{tab:'social',s:8,en:"It was really nice talking to you.",zh:"很高興跟你聊。",tip:"最基本也最不會錯。"},
-{tab:'social',s:8,en:"I should let you go — I know you're busy.",zh:"不打擾你了，我知道你忙。",tip:"把結束的理由放在自己身上，最體貼。"},
-{tab:'social',s:8,en:"I don't want to keep you.",zh:"不想佔用你太多時間。",tip:"非常常用的退場句。"},
-{tab:'social',s:8,en:"Let's catch up again soon.",zh:"找時間再聊。",tip:"catch up 是「敘舊、更新近況」的意思。"},
-{tab:'social',s:8,en:"I'll follow up with you by email.",zh:"我再寄信跟你聯繫。",tip:"商務場合收尾必備。"},
-{tab:'social',s:8,en:"Can I grab your card?",zh:"方便給我一張名片嗎？",tip:"交換聯絡方式。"},
-{tab:'social',s:8,en:"Let me get your contact — I'd love to stay in touch.",zh:"給我個聯絡方式吧，想保持聯繫。",tip:"比單純換名片更有溫度。"},
-{tab:'social',s:8,en:"Let me introduce you to [Name] — you two should meet.",zh:"我介紹你認識＿＿，你們應該認識一下。",tip:"[[最高級的收尾：]]把人推出去，替他創造價值。"},
-{tab:'social',s:8,en:"Enjoy the rest of the event!",zh:"祝你接下來的活動愉快！",tip:"活動場合通用。"},
-{tab:'social',s:8,en:"Take care — talk soon.",zh:"保重，再聊。",tip:"收尾最後一句。"},
+{tab:'social',s:8,en:"It was really nice talking to you.",zh:"很高興跟你聊。",tip:"最基本也最不會錯。",re:"Likewise. Let's not leave it this long next time.",rezh:"我也是，下次別隔這麼久。"},
+{tab:'social',s:8,en:"I should let you go — I know you're busy.",zh:"不打擾你了，我知道你忙。",tip:"把結束的理由放在自己身上，最體貼。",re:"Thanks for understanding. Let's talk soon.",rezh:"謝謝你體諒，我們再聊。"},
+{tab:'social',s:8,en:"I don't want to keep you.",zh:"不想佔用你太多時間。",tip:"非常常用的退場句。",re:"You're not keeping me at all, but I do have a meeting.",rezh:"你完全沒打擾我，不過我確實還有個會。"},
+{tab:'social',s:8,en:"Let's catch up again soon.",zh:"找時間再聊。",tip:"catch up 是「敘舊、更新近況」的意思。",re:"Definitely. I'll send you a message.",rezh:"一定，我再傳訊息給你。"},
+{tab:'social',s:8,en:"I'll follow up with you by email.",zh:"我再寄信跟你聯繫。",tip:"商務場合收尾必備。",re:"Sounds good. I'll look out for it.",rezh:"好啊，我會注意收信。"},
+{tab:'social',s:8,en:"Can I grab your card?",zh:"方便給我一張名片嗎？",tip:"交換聯絡方式。",re:"Of course — here you go. And yours?",rezh:"當然，給你。你的呢？"},
+{tab:'social',s:8,en:"Let me get your contact — I'd love to stay in touch.",zh:"給我個聯絡方式吧，想保持聯繫。",tip:"比單純換名片更有溫度。",re:"Sure, let me scan your QR code.",rezh:"好啊，我掃你的 QR code。"},
+{tab:'social',s:8,en:"Let me introduce you to [Name] — you two should meet.",zh:"我介紹你認識＿＿，你們應該認識一下。",tip:"[[最高級的收尾：]]把人推出去，替他創造價值。",re:"That'd be great. Thanks for thinking of me.",rezh:"太好了，謝謝你想到我。"},
+{tab:'social',s:8,en:"Enjoy the rest of the event!",zh:"祝你接下來的活動愉快！",tip:"活動場合通用。",re:"You too — catch you later.",rezh:"你也是，待會見。"},
+{tab:'social',s:8,en:"Take care — talk soon.",zh:"保重，再聊。",tip:"收尾最後一句。",re:"You too. Bye for now.",rezh:"你也是，先這樣。"},
 
-{tab:'social',s:9,en:"Can everyone hear me okay?",zh:"大家都聽得到嗎？",tip:"開場確認。"},
-{tab:'social',s:9,en:"Looks like we're just waiting on one more.",zh:"看起來還差一位。",tip:"等待時的暖場。"},
-{tab:'social',s:9,en:"How's the weather over there?",zh:"你那邊天氣如何？",tip:"跨國視訊的自然話題。"},
-{tab:'social',s:9,en:"Sorry, you froze for a second there.",zh:"抱歉，你剛畫面停了一下。",tip:"技術狀況的道地說法。"},
-{tab:'social',s:9,en:"I'll share my screen now.",zh:"我現在分享畫面。",tip:"從閒聊切進正題。"},
-{tab:'social',s:9,en:"Let's pick this up where we left off.",zh:"我們從上次停的地方接續。",tip:"第二次會議開場。"},
-{tab:'social',s:9,en:"Before we hang up — anything else?",zh:"掛電話前，還有別的嗎？",tip:"電話收尾。"},
-{tab:'social',s:9,en:"Thanks for taking the call.",zh:"謝謝你接這通電話。",tip:"接到陌生來電之後的禮貌。"},
-{tab:'social',s:9,en:"I'll send a quick recap after this.",zh:"會後我寄一份重點整理。",tip:"顯得可靠。"},
-{tab:'social',s:9,en:"Thanks for your time — appreciate it.",zh:"謝謝你的時間，很感謝。",tip:"遠距收尾最穩的一句。"},
+{tab:'social',s:9,en:"Can everyone hear me okay?",zh:"大家都聽得到嗎？",tip:"開場確認。",re:"Loud and clear.",rezh:"聽得很清楚。"},
+{tab:'social',s:9,en:"Looks like we're just waiting on one more.",zh:"看起來還差一位。",tip:"等待時的暖場。",re:"I think she's joining now.",rezh:"她好像正在進來。"},
+{tab:'social',s:9,en:"How's the weather over there?",zh:"你那邊天氣如何？",tip:"跨國視訊的自然話題。",re:"Pouring, actually. Typical for this time of year.",rezh:"其實在下大雨，這季節就是這樣。"},
+{tab:'social',s:9,en:"Sorry, you froze for a second there.",zh:"抱歉，你剛畫面停了一下。",tip:"技術狀況的道地說法。",re:"No problem, I'm back. Can you hear me?",rezh:"沒關係，我回來了，聽得到嗎？"},
+{tab:'social',s:9,en:"I'll share my screen now.",zh:"我現在分享畫面。",tip:"從閒聊切進正題。",re:"Got it — I can see it.",rezh:"好，我看得到。"},
+{tab:'social',s:9,en:"Let's pick this up where we left off.",zh:"我們從上次停的地方接續。",tip:"第二次會議開場。",re:"Sounds good. Last time we were on the budget.",rezh:"好啊，上次我們講到預算。"},
+{tab:'social',s:9,en:"Before we hang up — anything else?",zh:"掛電話前，還有別的嗎？",tip:"電話收尾。",re:"That's everything from my side. Thanks.",rezh:"我這邊都講完了，謝謝。"},
+{tab:'social',s:9,en:"Thanks for taking the call.",zh:"謝謝你接這通電話。",tip:"接到陌生來電之後的禮貌。",re:"No problem at all. Good timing, actually.",rezh:"不會，其實你打來得剛好。"},
+{tab:'social',s:9,en:"I'll send a quick recap after this.",zh:"會後我寄一份重點整理。",tip:"顯得可靠。",re:"Perfect, that'd be helpful.",rezh:"太好了，那很有幫助。"},
+{tab:'social',s:9,en:"Thanks for your time — appreciate it.",zh:"謝謝你的時間，很感謝。",tip:"遠距收尾最穩的一句。",re:"Thank you. Have a good one.",rezh:"謝謝你，祝順心。"},
 
 /* ── 多益商務 ── */
-{tab:'toeic',s:0,en:"I'll get back to you by the end of the day.",zh:"我今天下班前回覆你。",tip:"[[高頻：]] get back to you＝回覆某人。多益常以「何時回覆」出題。"},
-{tab:'toeic',s:0,en:"Could you cc me on that email?",zh:"可以把我副本進那封信嗎？",tip:"[[考點：]] cc＝副本（carbon copy），bcc＝密件副本。"},
-{tab:'toeic',s:0,en:"The meeting has been pushed back to 3 p.m.",zh:"會議延到下午三點。",tip:"[[考點：]] push back＝延後；move up＝提前。方向別記反。"},
-{tab:'toeic',s:0,en:"I'm out of the office until Monday.",zh:"我週一前不在辦公室。",tip:"[[考點：]] 自動回覆信件的常見句，多益閱讀愛考。"},
-{tab:'toeic',s:0,en:"Let's touch base tomorrow morning.",zh:"我們明早再碰一下。",tip:"[[高頻片語：]] touch base with someone＝短暫聯繫、對一下進度。"},
-{tab:'toeic',s:0,en:"Can you walk me through the process?",zh:"你可以帶我跑一遍流程嗎？",tip:"[[高頻：]] walk someone through＝一步步說明。常與 procedure 一起出現。"},
-{tab:'toeic',s:0,en:"I'll loop in the design team on this.",zh:"我會把設計團隊拉進來一起看。",tip:"[[高頻：]] loop in＝把某人納入溝通。同義替換常出 involve／include。"},
-{tab:'toeic',s:0,en:"She's on another line right now.",zh:"她正在講另一通電話。",tip:"[[考點：]] on another line＝通話中。電話情境必背。"},
-{tab:'toeic',s:0,en:"Please hold off on that until further notice.",zh:"那件事請暫緩，等候進一步通知。",tip:"[[考點：]] hold off＝暫緩；until further notice＝等候通知。"},
-{tab:'toeic',s:0,en:"We're on a tight deadline.",zh:"我們的期限很緊。",tip:"[[考點：]] tight deadline／meet the deadline／extend the deadline，三個常一起考。"},
+{tab:'toeic',s:0,en:"I'll get back to you by the end of the day.",zh:"我今天下班前回覆你。",tip:"[[高頻：]] get back to you＝回覆某人。多益常以「何時回覆」出題。",re:"Thanks, I'll keep an eye on my inbox.",rezh:"謝謝，我會注意信箱。"},
+{tab:'toeic',s:0,en:"Could you cc me on that email?",zh:"可以把我副本進那封信嗎？",tip:"[[考點：]] cc＝副本（carbon copy），bcc＝密件副本。",re:"Sure, I'll add you now.",rezh:"好，我現在加你。"},
+{tab:'toeic',s:0,en:"The meeting has been pushed back to 3 p.m.",zh:"會議延到下午三點。",tip:"[[考點：]] push back＝延後；move up＝提前。方向別記反。",re:"Got it. I'll update everyone's calendar.",rezh:"了解，我會更新大家的行事曆。"},
+{tab:'toeic',s:0,en:"I'm out of the office until Monday.",zh:"我週一前不在辦公室。",tip:"[[考點：]] 自動回覆信件的常見句，多益閱讀愛考。",re:"Noted. Who should I contact while you're away?",rezh:"了解。你不在的期間我該找誰？"},
+{tab:'toeic',s:0,en:"Let's touch base tomorrow morning.",zh:"我們明早再碰一下。",tip:"[[高頻片語：]] touch base with someone＝短暫聯繫、對一下進度。",re:"Works for me. I'll send an invite.",rezh:"可以，我寄個會議邀請。"},
+{tab:'toeic',s:0,en:"Can you walk me through the process?",zh:"你可以帶我跑一遍流程嗎？",tip:"[[高頻：]] walk someone through＝一步步說明。常與 procedure 一起出現。",re:"Of course. Let's start with the first step.",rezh:"當然，我們從第一步開始。"},
+{tab:'toeic',s:0,en:"I'll loop in the design team on this.",zh:"我會把設計團隊拉進來一起看。",tip:"[[高頻：]] loop in＝把某人納入溝通。同義替換常出 involve／include。",re:"Good idea — they should hear it from the start.",rezh:"好主意，他們應該從頭就參與。"},
+{tab:'toeic',s:0,en:"She's on another line right now.",zh:"她正在講另一通電話。",tip:"[[考點：]] on another line＝通話中。電話情境必背。",re:"No problem, I'll hold.",rezh:"沒問題，我等。"},
+{tab:'toeic',s:0,en:"Please hold off on that until further notice.",zh:"那件事請暫緩，等候進一步通知。",tip:"[[考點：]] hold off＝暫緩；until further notice＝等候通知。",re:"Understood. I'll pause it for now.",rezh:"了解，我先暫停。"},
+{tab:'toeic',s:0,en:"We're on a tight deadline.",zh:"我們的期限很緊。",tip:"[[考點：]] tight deadline／meet the deadline／extend the deadline，三個常一起考。",re:"Then let's prioritize. What's most urgent?",rezh:"那我們排一下優先順序，哪個最急？"},
 
-{tab:'toeic',s:1,en:"Let's go over the agenda first.",zh:"我們先過一下議程。",tip:"[[考點：]] go over＝逐項檢視；agenda 是必背字。"},
-{tab:'toeic',s:1,en:"Can we circle back to that later?",zh:"那點可以稍後再回來談嗎？",tip:"[[高頻片語：]] circle back＝回頭再談。同義替換是 revisit。"},
-{tab:'toeic',s:1,en:"I'd like to add one more item to the agenda.",zh:"我想在議程上再加一項。",tip:"[[考點：]] item＝議程項目，也出現在訂單情境，注意一詞多義。"},
-{tab:'toeic',s:1,en:"Just to make sure we're on the same page —",zh:"先確認一下我們認知一致——",tip:"[[高頻片語：]] on the same page＝有共識。多益聽力很常出現。"},
-{tab:'toeic',s:1,en:"Could you elaborate on that point?",zh:"可以就這點再說明一下嗎？",tip:"[[考點：]] elaborate on＝詳述。選項常替換成 explain further。"},
-{tab:'toeic',s:1,en:"Let's table this for now.",zh:"這個我們先擱置。",tip:"[[必考陷阱：]] 美式＝擱置、英式＝列入議程，意思完全相反，看上下文判斷。"},
-{tab:'toeic',s:1,en:"We're running out of time.",zh:"我們時間快不夠了。",tip:"[[考點：]] run out of＝用盡。常與 time／budget／stock 搭配。"},
-{tab:'toeic',s:1,en:"Let's take this offline.",zh:"這個我們會後私下談。",tip:"[[考點：]] take it offline＝不在會中討論。字面看不出意思，要背。"},
-{tab:'toeic',s:1,en:"To sum up, we've agreed on three points.",zh:"總結一下，我們達成三點共識。",tip:"[[考點：]] sum up＝總結。常接 reach／agree on an agreement。"},
-{tab:'toeic',s:1,en:"I'll send the minutes right after the meeting.",zh:"會後我馬上寄會議紀錄。",tip:"[[考點：]] minutes＝會議紀錄（複數）。這是多益經典陷阱字。"},
+{tab:'toeic',s:1,en:"Let's go over the agenda first.",zh:"我們先過一下議程。",tip:"[[考點：]] go over＝逐項檢視；agenda 是必背字。",re:"Sure, I have a copy right in front of me.",rezh:"好啊，我手上正好有一份。"},
+{tab:'toeic',s:1,en:"Can we circle back to that later?",zh:"那點可以稍後再回來談嗎？",tip:"[[高頻片語：]] circle back＝回頭再談。同義替換是 revisit。",re:"Sure, let's note it and move on.",rezh:"可以，我們記下來，繼續往下。"},
+{tab:'toeic',s:1,en:"I'd like to add one more item to the agenda.",zh:"我想在議程上再加一項。",tip:"[[考點：]] item＝議程項目，也出現在訂單情境，注意一詞多義。",re:"Go ahead — we still have time.",rezh:"請說，我們還有時間。"},
+{tab:'toeic',s:1,en:"Just to make sure we're on the same page —",zh:"先確認一下我們認知一致——",tip:"[[高頻片語：]] on the same page＝有共識。多益聽力很常出現。",re:"Good idea. Let me repeat it back to you.",rezh:"好主意，我複述一次確認。"},
+{tab:'toeic',s:1,en:"Could you elaborate on that point?",zh:"可以就這點再說明一下嗎？",tip:"[[考點：]] elaborate on＝詳述。選項常替換成 explain further。",re:"Sure. Basically, it comes down to cost.",rezh:"當然。基本上就是成本的問題。"},
+{tab:'toeic',s:1,en:"Let's table this for now.",zh:"這個我們先擱置。",tip:"[[必考陷阱：]] 美式＝擱置、英式＝列入議程，意思完全相反，看上下文判斷。",re:"Agreed. We'll come back to it next week.",rezh:"同意，下週再回來談。"},
+{tab:'toeic',s:1,en:"We're running out of time.",zh:"我們時間快不夠了。",tip:"[[考點：]] run out of＝用盡。常與 time／budget／stock 搭配。",re:"Should we continue this offline?",rezh:"要不要會後再繼續？"},
+{tab:'toeic',s:1,en:"Let's take this offline.",zh:"這個我們會後私下談。",tip:"[[考點：]] take it offline＝不在會中討論。字面看不出意思，要背。",re:"Fine by me. I'll set up a separate call.",rezh:"我沒問題，我再另外約一通電話。"},
+{tab:'toeic',s:1,en:"To sum up, we've agreed on three points.",zh:"總結一下，我們達成三點共識。",tip:"[[考點：]] sum up＝總結。常接 reach／agree on an agreement。",re:"That matches my notes. Shall I send them out?",rezh:"跟我記的一致，要我寄出去嗎？"},
+{tab:'toeic',s:1,en:"I'll send the minutes right after the meeting.",zh:"會後我馬上寄會議紀錄。",tip:"[[考點：]] minutes＝會議紀錄（複數）。這是多益經典陷阱字。",re:"Thanks — please include the action items.",rezh:"謝謝，請把待辦事項也寫進去。"},
 
-{tab:'toeic',s:2,en:"I'll have someone pick you up at the airport.",zh:"我會派人到機場接你。",tip:"[[考點：]] pick up＝接人；也可指「取貨」，一詞多義。"},
-{tab:'toeic',s:2,en:"Would Tuesday afternoon work for you?",zh:"週二下午你方便嗎？",tip:"[[考點：]] work for someone＝對某人方便。商務約時間的萬用句。"},
-{tab:'toeic',s:2,en:"I'll arrange a tour of the facility.",zh:"我會安排參觀廠區。",tip:"[[高頻字：]] facility＝設施、廠區。多益閱讀常出現。"},
-{tab:'toeic',s:2,en:"Please let us know if there's anything we can do.",zh:"有任何我們能做的，請告訴我們。",tip:"[[考點：]] 商務書信的標準客套句，常在閱讀測驗出現。"},
-{tab:'toeic',s:2,en:"We'd be happy to extend the warranty.",zh:"我們樂意延長保固。",tip:"[[必背字：]] warranty＝保固。與 guarantee 意思接近但用法不同。"},
-{tab:'toeic',s:2,en:"I'll get you a quote by Friday.",zh:"我週五前給你報價。",tip:"[[考點：]] quote／quotation＝報價單；estimate＝估價。"},
-{tab:'toeic',s:2,en:"Thank you for considering our proposal.",zh:"謝謝你考慮我們的提案。",tip:"[[考點：]] proposal 常與 submit／review／accept 搭配出題。"},
-{tab:'toeic',s:2,en:"We look forward to a long-term partnership.",zh:"期待長期合作。",tip:"[[文法考點：]] look forward to 後面接名詞或 V-ing，不接原形動詞。"},
-{tab:'toeic',s:2,en:"I'll follow up on our discussion next week.",zh:"下週我會就我們談的內容跟進。",tip:"[[高頻：]] follow up on＝就某事跟進。名詞寫法是 follow-up。"},
-{tab:'toeic',s:2,en:"Let me introduce our sales manager, Ms. Chen.",zh:"讓我介紹我們的業務經理陳小姐。",tip:"[[考點：]] 職稱加姓氏的介紹順序，聽力常考「誰是誰」。"},
+{tab:'toeic',s:2,en:"I'll have someone pick you up at the airport.",zh:"我會派人到機場接你。",tip:"[[考點：]] pick up＝接人；也可指「取貨」，一詞多義。",re:"That's very thoughtful of you, thank you.",rezh:"太貼心了，謝謝你。"},
+{tab:'toeic',s:2,en:"Would Tuesday afternoon work for you?",zh:"週二下午你方便嗎？",tip:"[[考點：]] work for someone＝對某人方便。商務約時間的萬用句。",re:"Tuesday works. What time were you thinking?",rezh:"週二可以，你想約幾點？"},
+{tab:'toeic',s:2,en:"I'll arrange a tour of the facility.",zh:"我會安排參觀廠區。",tip:"[[高頻字：]] facility＝設施、廠區。多益閱讀常出現。",re:"I'd like that. How long does the tour take?",rezh:"好啊，參觀大概需要多久？"},
+{tab:'toeic',s:2,en:"Please let us know if there's anything we can do.",zh:"有任何我們能做的，請告訴我們。",tip:"[[考點：]] 商務書信的標準客套句，常在閱讀測驗出現。",re:"I will. Thanks for being so accommodating.",rezh:"我會的，謝謝你們這麼配合。"},
+{tab:'toeic',s:2,en:"We'd be happy to extend the warranty.",zh:"我們樂意延長保固。",tip:"[[必背字：]] warranty＝保固。與 guarantee 意思接近但用法不同。",re:"That would put our minds at ease.",rezh:"那我們就放心了。"},
+{tab:'toeic',s:2,en:"I'll get you a quote by Friday.",zh:"我週五前給你報價。",tip:"[[考點：]] quote／quotation＝報價單；estimate＝估價。",re:"Perfect, I'll review it over the weekend.",rezh:"太好了，我週末會看過。"},
+{tab:'toeic',s:2,en:"Thank you for considering our proposal.",zh:"謝謝你考慮我們的提案。",tip:"[[考點：]] proposal 常與 submit／review／accept 搭配出題。",re:"Of course. We'll get back to you shortly.",rezh:"應該的，我們很快會回覆。"},
+{tab:'toeic',s:2,en:"We look forward to a long-term partnership.",zh:"期待長期合作。",tip:"[[文法考點：]] look forward to 後面接名詞或 V-ing，不接原形動詞。",re:"So do we. This is just the beginning.",rezh:"我們也是，這才剛開始。"},
+{tab:'toeic',s:2,en:"I'll follow up on our discussion next week.",zh:"下週我會就我們談的內容跟進。",tip:"[[高頻：]] follow up on＝就某事跟進。名詞寫法是 follow-up。",re:"Sounds good. I'll expect your call.",rezh:"好啊，我等你的電話。"},
+{tab:'toeic',s:2,en:"Let me introduce our sales manager, Ms. Chen.",zh:"讓我介紹我們的業務經理陳小姐。",tip:"[[考點：]] 職稱加姓氏的介紹順序，聽力常考「誰是誰」。",re:"Nice to meet you, Ms. Chen.",rezh:"陳小姐，很高興認識你。"},
 
-{tab:'toeic',s:3,en:"I'd like to book a round-trip ticket to Singapore.",zh:"我想訂一張往新加坡的來回票。",tip:"[[考點：]] round-trip＝來回；one-way＝單程。"},
-{tab:'toeic',s:3,en:"Could I get an aisle seat, please?",zh:"可以給我靠走道的位子嗎？",tip:"[[考點：]] aisle＝走道，發音像「艾歐」，s 不發音；window seat＝靠窗。"},
-{tab:'toeic',s:3,en:"Is breakfast included in the rate?",zh:"房價有含早餐嗎？",tip:"[[考點：]] rate＝房價、費率。included／complimentary 都常出。"},
-{tab:'toeic',s:3,en:"I need to change my reservation.",zh:"我要更改訂位。",tip:"[[考點：]] reservation＝訂位；reschedule＝改期。"},
-{tab:'toeic',s:3,en:"What time is check-out?",zh:"幾點退房？",tip:"[[考點：]] check-in／check-out 是住宿情境必考。"},
-{tab:'toeic',s:3,en:"Could you call me a taxi, please?",zh:"可以幫我叫計程車嗎？",tip:"[[考點：]] 飯店服務句型，常出現在 Part 2 應答。"},
-{tab:'toeic',s:3,en:"The flight has been delayed by two hours.",zh:"班機延誤兩小時。",tip:"[[考點：]] delayed／postponed／cancelled 三個狀態常一起考。"},
-{tab:'toeic',s:3,en:"I'd like to extend my stay by one night.",zh:"我想多住一晚。",tip:"[[考點：]] extend by＝延長多久；extend to＝延長到某時點。"},
-{tab:'toeic',s:3,en:"Do you offer a corporate rate?",zh:"你們有企業優惠價嗎？",tip:"[[考點：]] corporate＝企業的。corporate account／corporate rate 常出。"},
-{tab:'toeic',s:3,en:"I'll need a receipt for reimbursement.",zh:"我需要收據來報帳。",tip:"[[必背字：]] reimbursement＝報帳、核銷。多益超高頻。"},
+{tab:'toeic',s:3,en:"I'd like to book a round-trip ticket to Singapore.",zh:"我想訂一張往新加坡的來回票。",tip:"[[考點：]] round-trip＝來回；one-way＝單程。",re:"Certainly. What dates did you have in mind?",rezh:"好的，請問你打算哪幾天？"},
+{tab:'toeic',s:3,en:"Could I get an aisle seat, please?",zh:"可以給我靠走道的位子嗎？",tip:"[[考點：]] aisle＝走道，發音像「艾歐」，s 不發音；window seat＝靠窗。",re:"Let me check... yes, 14C is available.",rezh:"我查一下……有，14C 有空位。"},
+{tab:'toeic',s:3,en:"Is breakfast included in the rate?",zh:"房價有含早餐嗎？",tip:"[[考點：]] rate＝房價、費率。included／complimentary 都常出。",re:"It is — served from six to ten a.m.",rezh:"有含，早上六點到十點供應。"},
+{tab:'toeic',s:3,en:"I need to change my reservation.",zh:"我要更改訂位。",tip:"[[考點：]] reservation＝訂位；reschedule＝改期。",re:"No problem. Could I have your confirmation number?",rezh:"沒問題，可以給我你的訂房編號嗎？"},
+{tab:'toeic',s:3,en:"What time is check-out?",zh:"幾點退房？",tip:"[[考點：]] check-in／check-out 是住宿情境必考。",re:"Check-out is at eleven a.m. Late check-out is available.",rezh:"退房是上午十一點，也可以延後退房。"},
+{tab:'toeic',s:3,en:"Could you call me a taxi, please?",zh:"可以幫我叫計程車嗎？",tip:"[[考點：]] 飯店服務句型，常出現在 Part 2 應答。",re:"Right away. Where are you heading?",rezh:"馬上辦，請問你要去哪裡？"},
+{tab:'toeic',s:3,en:"The flight has been delayed by two hours.",zh:"班機延誤兩小時。",tip:"[[考點：]] delayed／postponed／cancelled 三個狀態常一起考。",re:"That's unfortunate. Has the gate changed?",rezh:"真不巧。登機門有變嗎？"},
+{tab:'toeic',s:3,en:"I'd like to extend my stay by one night.",zh:"我想多住一晚。",tip:"[[考點：]] extend by＝延長多久；extend to＝延長到某時點。",re:"Let me see if we have availability.",rezh:"我查一下還有沒有空房。"},
+{tab:'toeic',s:3,en:"Do you offer a corporate rate?",zh:"你們有企業優惠價嗎？",tip:"[[考點：]] corporate＝企業的。corporate account／corporate rate 常出。",re:"We do, if you're booking on a company account.",rezh:"有，如果是用公司帳號訂的話。"},
+{tab:'toeic',s:3,en:"I'll need a receipt for reimbursement.",zh:"我需要收據來報帳。",tip:"[[必背字：]] reimbursement＝報帳、核銷。多益超高頻。",re:"Certainly. I'll print one for you right now.",rezh:"好的，我馬上印給你。"},
 
-{tab:'toeic',s:4,en:"We'd like to place a bulk order.",zh:"我們想下一筆大量訂單。",tip:"[[考點：]] place an order＝下單；bulk＝大量。"},
-{tab:'toeic',s:4,en:"Could you send us a sample first?",zh:"可以先寄樣品給我們嗎？",tip:"[[考點：]] sample＝樣品，選項常替換成 specimen。"},
-{tab:'toeic',s:4,en:"The shipment is scheduled for next Monday.",zh:"這批貨預計下週一出貨。",tip:"[[文法考點：]] be scheduled for＋時間／be scheduled to＋動詞。"},
-{tab:'toeic',s:4,en:"Your order is currently out of stock.",zh:"你的訂單目前缺貨。",tip:"[[考點：]] out of stock＝缺貨；in stock＝有現貨。反義對比常出。"},
-{tab:'toeic',s:4,en:"We can offer a 10% discount on orders over 500 units.",zh:"500 件以上的訂單可給九折。",tip:"[[考點：]] discount on＋商品。數字與條件是解題關鍵。"},
-{tab:'toeic',s:4,en:"Please confirm the quantity and specifications.",zh:"請確認數量與規格。",tip:"[[必背字：]] specifications＝規格，常縮寫成 spec。"},
-{tab:'toeic',s:4,en:"The lead time is approximately three weeks.",zh:"交期大約三週。",tip:"[[必背字：]] lead time＝從下單到交貨的時間。多益高頻。"},
-{tab:'toeic',s:4,en:"There's been a delay in production.",zh:"生產有延誤。",tip:"[[考點：]] delay in＋名詞。多益愛問「延誤的原因是什麼」。"},
-{tab:'toeic',s:4,en:"We'll cover the shipping costs.",zh:"運費由我們負擔。",tip:"[[考點：]] cover＝負擔費用，選項常替換成 bear／absorb。"},
-{tab:'toeic',s:4,en:"I'm attaching the invoice to this email.",zh:"我把發票附在這封信裡。",tip:"[[必背字：]] invoice＝發票、請款單；receipt＝收據。兩者不同。"},
+{tab:'toeic',s:4,en:"We'd like to place a bulk order.",zh:"我們想下一筆大量訂單。",tip:"[[考點：]] place an order＝下單；bulk＝大量。",re:"Great. How many units are you thinking?",rezh:"太好了，請問你們要多少件？"},
+{tab:'toeic',s:4,en:"Could you send us a sample first?",zh:"可以先寄樣品給我們嗎？",tip:"[[考點：]] sample＝樣品，選項常替換成 specimen。",re:"Sure, we'll ship it out today.",rezh:"當然，我們今天寄出。"},
+{tab:'toeic',s:4,en:"The shipment is scheduled for next Monday.",zh:"這批貨預計下週一出貨。",tip:"[[文法考點：]] be scheduled for＋時間／be scheduled to＋動詞。",re:"Good. Will you send us a tracking number?",rezh:"好，會給我們追蹤編號嗎？"},
+{tab:'toeic',s:4,en:"Your order is currently out of stock.",zh:"你的訂單目前缺貨。",tip:"[[考點：]] out of stock＝缺貨；in stock＝有現貨。反義對比常出。",re:"When do you expect it back in stock?",rezh:"什麼時候會補到貨？"},
+{tab:'toeic',s:4,en:"We can offer a 10% discount on orders over 500 units.",zh:"500 件以上的訂單可給九折。",tip:"[[考點：]] discount on＋商品。數字與條件是解題關鍵。",re:"That works. Let's go with six hundred.",rezh:"可以，那我們就訂六百件。"},
+{tab:'toeic',s:4,en:"Please confirm the quantity and specifications.",zh:"請確認數量與規格。",tip:"[[必背字：]] specifications＝規格，常縮寫成 spec。",re:"I'll double-check and get back to you.",rezh:"我再確認一次，然後回覆你。"},
+{tab:'toeic',s:4,en:"The lead time is approximately three weeks.",zh:"交期大約三週。",tip:"[[必背字：]] lead time＝從下單到交貨的時間。多益高頻。",re:"That's longer than we hoped, but okay.",rezh:"比我們預期的久，不過可以。"},
+{tab:'toeic',s:4,en:"There's been a delay in production.",zh:"生產有延誤。",tip:"[[考點：]] delay in＋名詞。多益愛問「延誤的原因是什麼」。",re:"What caused it? We need to inform our client.",rezh:"是什麼原因？我們得跟客戶說明。"},
+{tab:'toeic',s:4,en:"We'll cover the shipping costs.",zh:"運費由我們負擔。",tip:"[[考點：]] cover＝負擔費用，選項常替換成 bear／absorb。",re:"That's fair. Thanks for taking care of it.",rezh:"那就合理了，謝謝你們處理。"},
+{tab:'toeic',s:4,en:"I'm attaching the invoice to this email.",zh:"我把發票附在這封信裡。",tip:"[[必背字：]] invoice＝發票、請款單；receipt＝收據。兩者不同。",re:"Got it. I'll pass it on to accounting.",rezh:"收到，我轉給會計。"},
 
-{tab:'toeic',s:5,en:"I'm sorry for the inconvenience.",zh:"造成不便，很抱歉。",tip:"[[考點：]] inconvenience 是客服情境的必備字。"},
-{tab:'toeic',s:5,en:"Could you give me your order number?",zh:"可以給我你的訂單編號嗎？",tip:"[[考點：]] 客服第一步行動，Part 3 常考「他為什麼問這個」。"},
-{tab:'toeic',s:5,en:"Let me look into that for you.",zh:"我幫你查一下。",tip:"[[高頻片語：]] look into＝調查、查明，同義替換是 investigate。"},
-{tab:'toeic',s:5,en:"I'll transfer you to the right department.",zh:"我幫你轉到負責的部門。",tip:"[[考點：]] transfer／forward／redirect 都表轉接或轉寄。"},
-{tab:'toeic',s:5,en:"We'll issue a full refund.",zh:"我們會辦理全額退款。",tip:"[[必背字：]] refund＝退款。issue a refund 是固定搭配。"},
-{tab:'toeic',s:5,en:"It should be resolved within 24 hours.",zh:"應該會在 24 小時內處理好。",tip:"[[考點：]] resolve＝解決；within＝在時間之內，別與 in 混淆。"},
-{tab:'toeic',s:5,en:"Thank you for bringing this to our attention.",zh:"謝謝你告訴我們這件事。",tip:"[[考點：]] bring to one's attention＝讓某人注意到。書信高頻。"},
-{tab:'toeic',s:5,en:"Would you prefer a replacement or a refund?",zh:"你想換貨還是退款？",tip:"[[考點：]] replacement＝替換品。二選一的問法是 Part 3 常見題型。"},
-{tab:'toeic',s:5,en:"I understand your frustration.",zh:"我理解你的不滿。",tip:"[[考點：]] frustration＝受挫、不滿。客服先安撫再處理。"},
-{tab:'toeic',s:5,en:"Is there anything else I can help you with?",zh:"還有什麼需要我協助的嗎？",tip:"[[考點：]] 客服結尾標準句，聽到這句通常代表對話要結束了。"},
+{tab:'toeic',s:5,en:"I'm sorry for the inconvenience.",zh:"造成不便，很抱歉。",tip:"[[考點：]] inconvenience 是客服情境的必備字。",re:"I appreciate that, but I've been waiting a week.",rezh:"謝謝你這麼說，不過我已經等一週了。"},
+{tab:'toeic',s:5,en:"Could you give me your order number?",zh:"可以給我你的訂單編號嗎？",tip:"[[考點：]] 客服第一步行動，Part 3 常考「他為什麼問這個」。",re:"Sure, it's on my confirmation email.",rezh:"好，在我的確認信上。"},
+{tab:'toeic',s:5,en:"Let me look into that for you.",zh:"我幫你查一下。",tip:"[[高頻片語：]] look into＝調查、查明，同義替換是 investigate。",re:"Please do. I'd like an answer today.",rezh:"麻煩你了，我希望今天就有答案。"},
+{tab:'toeic',s:5,en:"I'll transfer you to the right department.",zh:"我幫你轉到負責的部門。",tip:"[[考點：]] transfer／forward／redirect 都表轉接或轉寄。",re:"Okay, I'll hold.",rezh:"好，我等。"},
+{tab:'toeic',s:5,en:"We'll issue a full refund.",zh:"我們會辦理全額退款。",tip:"[[必背字：]] refund＝退款。issue a refund 是固定搭配。",re:"That's acceptable. How long will it take?",rezh:"可以接受，大概要多久？"},
+{tab:'toeic',s:5,en:"It should be resolved within 24 hours.",zh:"應該會在 24 小時內處理好。",tip:"[[考點：]] resolve＝解決；within＝在時間之內，別與 in 混淆。",re:"I'll hold you to that. Thank you.",rezh:"那我等你的消息，謝謝。"},
+{tab:'toeic',s:5,en:"Thank you for bringing this to our attention.",zh:"謝謝你告訴我們這件事。",tip:"[[考點：]] bring to one's attention＝讓某人注意到。書信高頻。",re:"Thanks for taking it seriously.",rezh:"謝謝你們認真處理。"},
+{tab:'toeic',s:5,en:"Would you prefer a replacement or a refund?",zh:"你想換貨還是退款？",tip:"[[考點：]] replacement＝替換品。二選一的問法是 Part 3 常見題型。",re:"A replacement, please — I still need it.",rezh:"換貨，我還需要用。"},
+{tab:'toeic',s:5,en:"I understand your frustration.",zh:"我理解你的不滿。",tip:"[[考點：]] frustration＝受挫、不滿。客服先安撫再處理。",re:"Thank you. I just want it fixed.",rezh:"謝謝，我只希望問題解決。"},
+{tab:'toeic',s:5,en:"Is there anything else I can help you with?",zh:"還有什麼需要我協助的嗎？",tip:"[[考點：]] 客服結尾標準句，聽到這句通常代表對話要結束了。",re:"No, that's all. Thanks for your help.",rezh:"沒有了，謝謝你的協助。"},
 
-{tab:'toeic',s:6,en:"We're looking to fill the position by next month.",zh:"我們希望下個月前補到這個缺。",tip:"[[考點：]] fill a position＝補缺；vacancy＝職缺。"},
-{tab:'toeic',s:6,en:"Could you walk me through your resume?",zh:"可以簡單說明一下你的履歷嗎？",tip:"[[考點：]] resume＝履歷，重音在字尾；當動詞則是「恢復」。"},
-{tab:'toeic',s:6,en:"What are your salary expectations?",zh:"你期望的待遇是多少？",tip:"[[考點：]] expectations＝期望（複數）。相關字：compensation、benefits。"},
-{tab:'toeic',s:6,en:"The position offers a competitive benefits package.",zh:"這個職位提供具競爭力的福利制度。",tip:"[[考點：]] benefits package＝福利方案，是固定說法。"},
-{tab:'toeic',s:6,en:"There will be a three-month probation period.",zh:"會有三個月試用期。",tip:"[[必背字：]] probation period＝試用期。人事公告常出。"},
-{tab:'toeic',s:6,en:"I'd like to apply for the marketing position.",zh:"我想應徵行銷職位。",tip:"[[考點：]] apply for＋職位；apply to＋公司。介系詞是常考點。"},
-{tab:'toeic',s:6,en:"When would you be able to start?",zh:"你什麼時候可以開始上班？",tip:"[[考點：]] 面試必問題。would 是委婉用法。"},
-{tab:'toeic',s:6,en:"We'll notify you of our decision by Friday.",zh:"我們會在週五前通知你結果。",tip:"[[考點：]] notify someone of something，介系詞固定用 of。"},
-{tab:'toeic',s:6,en:"She's been promoted to regional manager.",zh:"她升上區域經理了。",tip:"[[考點：]] be promoted to＋職位。常考「誰升到什麼職位」。"},
-{tab:'toeic',s:6,en:"The training session is mandatory for all new hires.",zh:"新人一律要參加這場訓練。",tip:"[[必背字：]] mandatory＝強制的；new hires＝新進人員。"},
+{tab:'toeic',s:6,en:"We're looking to fill the position by next month.",zh:"我們希望下個月前補到這個缺。",tip:"[[考點：]] fill a position＝補缺；vacancy＝職缺。",re:"I can start immediately if needed.",rezh:"如果有需要，我可以馬上報到。"},
+{tab:'toeic',s:6,en:"Could you walk me through your resume?",zh:"可以簡單說明一下你的履歷嗎？",tip:"[[考點：]] resume＝履歷，重音在字尾；當動詞則是「恢復」。",re:"Sure. I'll start with my most recent role.",rezh:"好，我從最近一份工作開始說。"},
+{tab:'toeic',s:6,en:"What are your salary expectations?",zh:"你期望的待遇是多少？",tip:"[[考點：]] expectations＝期望（複數）。相關字：compensation、benefits。",re:"I'm open to discussion, depending on the full package.",rezh:"我持開放態度，會看整體的待遇。"},
+{tab:'toeic',s:6,en:"The position offers a competitive benefits package.",zh:"這個職位提供具競爭力的福利制度。",tip:"[[考點：]] benefits package＝福利方案，是固定說法。",re:"That sounds attractive. Could you share the details?",rezh:"聽起來很吸引人，可以說明細節嗎？"},
+{tab:'toeic',s:6,en:"There will be a three-month probation period.",zh:"會有三個月試用期。",tip:"[[必背字：]] probation period＝試用期。人事公告常出。",re:"That's standard. I'm fine with it.",rezh:"這是慣例，我沒問題。"},
+{tab:'toeic',s:6,en:"I'd like to apply for the marketing position.",zh:"我想應徵行銷職位。",tip:"[[考點：]] apply for＋職位；apply to＋公司。介系詞是常考點。",re:"Great. Please send your resume to HR.",rezh:"很好，請把履歷寄給人資。"},
+{tab:'toeic',s:6,en:"When would you be able to start?",zh:"你什麼時候可以開始上班？",tip:"[[考點：]] 面試必問題。would 是委婉用法。",re:"I could start in two weeks.",rezh:"我兩週後可以開始。"},
+{tab:'toeic',s:6,en:"We'll notify you of our decision by Friday.",zh:"我們會在週五前通知你結果。",tip:"[[考點：]] notify someone of something，介系詞固定用 of。",re:"Thank you. I'll wait to hear from you.",rezh:"謝謝，我等你們的消息。"},
+{tab:'toeic',s:6,en:"She's been promoted to regional manager.",zh:"她升上區域經理了。",tip:"[[考點：]] be promoted to＋職位。常考「誰升到什麼職位」。",re:"That's well deserved. She's always been great.",rezh:"實至名歸，她一直表現很好。"},
+{tab:'toeic',s:6,en:"The training session is mandatory for all new hires.",zh:"新人一律要參加這場訓練。",tip:"[[必背字：]] mandatory＝強制的；new hires＝新進人員。",re:"Understood. Where is it held?",rezh:"了解，請問在哪裡舉行？"},
 
-{tab:'toeic',s:7,en:"The payment is due on the 15th.",zh:"付款期限是 15 號。",tip:"[[考點：]] due＝到期。due date／due on 是財務情境高頻。"},
-{tab:'toeic',s:7,en:"Could you send us a purchase order?",zh:"可以寄採購單給我們嗎？",tip:"[[必背字：]] purchase order＝採購單，常縮寫為 PO。"},
-{tab:'toeic',s:7,en:"We accept payment by bank transfer.",zh:"我們接受銀行轉帳。",tip:"[[考點：]] by＋付款方式：by check／by credit card／in cash。"},
-{tab:'toeic',s:7,en:"I think there's an error on the invoice.",zh:"我覺得這張發票有一處錯誤。",tip:"[[考點：]] 發票爭議是財務情境常見題材，注意 discrepancy＝不符。"},
-{tab:'toeic',s:7,en:"Please settle the outstanding balance.",zh:"請結清未付款項。",tip:"[[必背字：]] outstanding balance＝未結餘額；settle＝結清。"},
-{tab:'toeic',s:7,en:"We've revised the budget for next quarter.",zh:"我們調整了下季預算。",tip:"[[考點：]] revise＝修訂；quarter＝季，Q1／Q2 常出現。"},
-{tab:'toeic',s:7,en:"Could you provide a detailed breakdown?",zh:"可以提供詳細明細嗎？",tip:"[[考點：]] breakdown＝明細、細項分析，同義替換是 itemization。"},
-{tab:'toeic',s:7,en:"Payment terms are net 30.",zh:"付款條件是 30 天內付清。",tip:"[[考點：]] net 30＝收到發票後 30 天內付款。財務必考術語。"},
-{tab:'toeic',s:7,en:"The total comes to $4,500.",zh:"總計 4,500 美元。",tip:"[[考點：]] come to／amount to＝總計。聽力要注意數字連音。"},
-{tab:'toeic',s:7,en:"I'll need approval from my manager first.",zh:"我要先取得主管同意。",tip:"[[考點：]] approval from＋人；approval for＋事。介系詞是考點。"},
+{tab:'toeic',s:7,en:"The payment is due on the 15th.",zh:"付款期限是 15 號。",tip:"[[考點：]] due＝到期。due date／due on 是財務情境高頻。",re:"We'll send it by bank transfer on the twelfth.",rezh:"我們十二號會用轉帳匯過去。"},
+{tab:'toeic',s:7,en:"Could you send us a purchase order?",zh:"可以寄採購單給我們嗎？",tip:"[[必背字：]] purchase order＝採購單，常縮寫為 PO。",re:"Sure, I'll email it right away.",rezh:"好，我馬上寄。"},
+{tab:'toeic',s:7,en:"We accept payment by bank transfer.",zh:"我們接受銀行轉帳。",tip:"[[考點：]] by＋付款方式：by check／by credit card／in cash。",re:"That works. Please send me the account details.",rezh:"可以，請把帳號資料給我。"},
+{tab:'toeic',s:7,en:"I think there's an error on the invoice.",zh:"我覺得這張發票有一處錯誤。",tip:"[[考點：]] 發票爭議是財務情境常見題材，注意 discrepancy＝不符。",re:"Let me check. Which item is incorrect?",rezh:"我查一下，是哪一項有誤？"},
+{tab:'toeic',s:7,en:"Please settle the outstanding balance.",zh:"請結清未付款項。",tip:"[[必背字：]] outstanding balance＝未結餘額；settle＝結清。",re:"We'll process it this week.",rezh:"我們這週會處理。"},
+{tab:'toeic',s:7,en:"We've revised the budget for next quarter.",zh:"我們調整了下季預算。",tip:"[[考點：]] revise＝修訂；quarter＝季，Q1／Q2 常出現。",re:"Could you send me the updated figures?",rezh:"可以把更新後的數字給我嗎？"},
+{tab:'toeic',s:7,en:"Could you provide a detailed breakdown?",zh:"可以提供詳細明細嗎？",tip:"[[考點：]] breakdown＝明細、細項分析，同義替換是 itemization。",re:"Of course. I'll attach a spreadsheet.",rezh:"當然，我附一份試算表。"},
+{tab:'toeic',s:7,en:"Payment terms are net 30.",zh:"付款條件是 30 天內付清。",tip:"[[考點：]] net 30＝收到發票後 30 天內付款。財務必考術語。",re:"That's acceptable. We'll note it in the contract.",rezh:"可以接受，我們會寫進合約。"},
+{tab:'toeic',s:7,en:"The total comes to $4,500.",zh:"總計 4,500 美元。",tip:"[[考點：]] come to／amount to＝總計。聽力要注意數字連音。",re:"Let me confirm that against the purchase order.",rezh:"我跟採購單核對一下。"},
+{tab:'toeic',s:7,en:"I'll need approval from my manager first.",zh:"我要先取得主管同意。",tip:"[[考點：]] approval from＋人；approval for＋事。介系詞是考點。",re:"Take your time. We're not in a rush.",rezh:"慢慢來，我們不急。"},
 
-{tab:'toeic',s:8,en:"Let's move on to the next slide.",zh:"我們看下一張投影片。",tip:"[[考點：]] move on to＝進入下一項。簡報流程的標準句。"},
-{tab:'toeic',s:8,en:"As you can see from the chart, sales have increased.",zh:"如各位從圖表所見，銷售成長了。",tip:"[[考點：]] As you can see 是簡報起手式，Part 4 幾乎必出。"},
-{tab:'toeic',s:8,en:"I'd like to highlight three key findings.",zh:"我想特別指出三項主要發現。",tip:"[[考點：]] findings＝研究發現。數字會是解題關鍵。"},
-{tab:'toeic',s:8,en:"Sales figures are up 15% year on year.",zh:"銷售數字較去年同期成長 15%。",tip:"[[考點：]] year on year＝與去年同期相比。注意 up／down 與百分比。"},
-{tab:'toeic',s:8,en:"This brings me to my next point.",zh:"這帶到我下一點。",tip:"[[考點：]] 簡報轉場句，聽力用來判斷「現在講到第幾點」。"},
-{tab:'toeic',s:8,en:"I'll hand it over to my colleague.",zh:"我把時間交給我的同事。",tip:"[[考點：]] hand over＝交接、交給。常考「接下來誰講」。"},
-{tab:'toeic',s:8,en:"Are there any questions so far?",zh:"到目前為止有問題嗎？",tip:"[[考點：]] so far＝到目前為止，是高頻時間副詞。"},
-{tab:'toeic',s:8,en:"In conclusion, we recommend proceeding with the plan.",zh:"結論是，我們建議繼續執行這個計畫。",tip:"[[考點：]] proceed with＝繼續進行，同義替換是 go ahead with。"},
-{tab:'toeic',s:8,en:"The data suggests a downward trend.",zh:"數據顯示下滑趨勢。",tip:"[[考點：]] trend＝趨勢，upward／downward／steady 常一起考。"},
-{tab:'toeic',s:8,en:"I'll keep this brief.",zh:"我會講快一點、不拖時間。",tip:"[[考點：]] brief＝簡短的。keep it brief 是道地用法。"},
+{tab:'toeic',s:8,en:"Let's move on to the next slide.",zh:"我們看下一張投影片。",tip:"[[考點：]] move on to＝進入下一項。簡報流程的標準句。",re:"Before that — could you go back one slide?",rezh:"在那之前，可以回到上一張嗎？"},
+{tab:'toeic',s:8,en:"As you can see from the chart, sales have increased.",zh:"如各位從圖表所見，銷售成長了。",tip:"[[考點：]] As you can see 是簡報起手式，Part 4 幾乎必出。",re:"By how much, exactly?",rezh:"具體成長多少？"},
+{tab:'toeic',s:8,en:"I'd like to highlight three key findings.",zh:"我想特別指出三項主要發現。",tip:"[[考點：]] findings＝研究發現。數字會是解題關鍵。",re:"Please go ahead. We're all ears.",rezh:"請說，我們都在聽。"},
+{tab:'toeic',s:8,en:"Sales figures are up 15% year on year.",zh:"銷售數字較去年同期成長 15%。",tip:"[[考點：]] year on year＝與去年同期相比。注意 up／down 與百分比。",re:"That's a strong result. What drove it?",rezh:"成績很好，主要是什麼帶動的？"},
+{tab:'toeic',s:8,en:"This brings me to my next point.",zh:"這帶到我下一點。",tip:"[[考點：]] 簡報轉場句，聽力用來判斷「現在講到第幾點」。",re:"Go on, I'm following.",rezh:"繼續，我跟得上。"},
+{tab:'toeic',s:8,en:"I'll hand it over to my colleague.",zh:"我把時間交給我的同事。",tip:"[[考點：]] hand over＝交接、交給。常考「接下來誰講」。",re:"Thanks. I'll take it from here.",rezh:"謝謝，接下來交給我。"},
+{tab:'toeic',s:8,en:"Are there any questions so far?",zh:"到目前為止有問題嗎？",tip:"[[考點：]] so far＝到目前為止，是高頻時間副詞。",re:"Yes, one — when was this data collected?",rezh:"有一個，這份資料是什麼時候蒐集的？"},
+{tab:'toeic',s:8,en:"In conclusion, we recommend proceeding with the plan.",zh:"結論是，我們建議繼續執行這個計畫。",tip:"[[考點：]] proceed with＝繼續進行，同義替換是 go ahead with。",re:"I agree. Let's set a timeline.",rezh:"我同意，我們來訂個時程。"},
+{tab:'toeic',s:8,en:"The data suggests a downward trend.",zh:"數據顯示下滑趨勢。",tip:"[[考點：]] trend＝趨勢，upward／downward／steady 常一起考。",re:"Should we be worried about that?",rezh:"我們需要擔心嗎？"},
+{tab:'toeic',s:8,en:"I'll keep this brief.",zh:"我會講快一點、不拖時間。",tip:"[[考點：]] brief＝簡短的。keep it brief 是道地用法。",re:"Appreciate that. Please go ahead.",rezh:"太好了，請說。"},
 
-{tab:'toeic',s:9,en:"May I ask who's calling?",zh:"請問哪裡找？",tip:"[[考點：]] 接電話第一句，Part 2 應答題常出。"},
-{tab:'toeic',s:9,en:"Could you speak up a little, please?",zh:"可以請你大聲一點嗎？",tip:"[[考點：]] speak up＝提高音量，不是 speak louder。"},
-{tab:'toeic',s:9,en:"I think we have a bad connection.",zh:"我們線路好像不太好。",tip:"[[考點：]] connection＝線路、連線品質。"},
-{tab:'toeic',s:9,en:"Let me put you on speaker.",zh:"我開擴音。",tip:"[[考點：]] on speaker＝開擴音。與 mute／unmute 同屬會議字彙。"},
-{tab:'toeic',s:9,en:"Sorry, I didn't catch that. Could you repeat it?",zh:"抱歉我沒聽清楚，可以再說一次嗎？",tip:"[[考點：]] catch＝聽清楚。I didn't catch that 是超高頻句。"},
-{tab:'toeic',s:9,en:"I'll call you back in five minutes.",zh:"我五分鐘後回你電話。",tip:"[[考點：]] call back＝回電。多益愛問「他稍後要做什麼」。"},
-{tab:'toeic',s:9,en:"Could you spell that for me?",zh:"可以拼給我聽嗎？",tip:"[[考點：]] 拼字題常考，聽力要注意字母發音與連音。"},
-{tab:'toeic',s:9,en:"I'm having trouble hearing you.",zh:"我聽不太清楚你的聲音。",tip:"[[文法考點：]] have trouble＋V-ing，不是原形動詞。"},
-{tab:'toeic',s:9,en:"Can everyone see my screen?",zh:"大家看得到我的畫面嗎？",tip:"[[考點：]] 視訊會議情境近年出題率明顯提高。"},
-{tab:'toeic',s:9,en:"Let's wait a moment for the others to join.",zh:"我們等一下其他人加入。",tip:"[[文法考點：]] wait for someone to＋動詞，不定詞用法常考。"}
+{tab:'toeic',s:9,en:"May I ask who's calling?",zh:"請問哪裡找？",tip:"[[考點：]] 接電話第一句，Part 2 應答題常出。",re:"This is David Lin from Ace Corporation.",rezh:"我是 Ace 公司的 David Lin。"},
+{tab:'toeic',s:9,en:"Could you speak up a little, please?",zh:"可以請你大聲一點嗎？",tip:"[[考點：]] speak up＝提高音量，不是 speak louder。",re:"Sorry about that. Is this better?",rezh:"抱歉，這樣有比較好嗎？"},
+{tab:'toeic',s:9,en:"I think we have a bad connection.",zh:"我們線路好像不太好。",tip:"[[考點：]] connection＝線路、連線品質。",re:"Let me call you back on a landline.",rezh:"我換市話回撥給你。"},
+{tab:'toeic',s:9,en:"Let me put you on speaker.",zh:"我開擴音。",tip:"[[考點：]] on speaker＝開擴音。與 mute／unmute 同屬會議字彙。",re:"Okay, just so you know, my manager is here too.",rezh:"好，先跟你說，我主管也在旁邊。"},
+{tab:'toeic',s:9,en:"Sorry, I didn't catch that. Could you repeat it?",zh:"抱歉我沒聽清楚，可以再說一次嗎？",tip:"[[考點：]] catch＝聽清楚。I didn't catch that 是超高頻句。",re:"Sure — I'll say it more slowly.",rezh:"好，我放慢速度再說一次。"},
+{tab:'toeic',s:9,en:"I'll call you back in five minutes.",zh:"我五分鐘後回你電話。",tip:"[[考點：]] call back＝回電。多益愛問「他稍後要做什麼」。",re:"No problem, I'll be here.",rezh:"沒問題，我在。"},
+{tab:'toeic',s:9,en:"Could you spell that for me?",zh:"可以拼給我聽嗎？",tip:"[[考點：]] 拼字題常考，聽力要注意字母發音與連音。",re:"Certainly — L-I-N, Lin.",rezh:"好——L-I-N，Lin。"},
+{tab:'toeic',s:9,en:"I'm having trouble hearing you.",zh:"我聽不太清楚你的聲音。",tip:"[[文法考點：]] have trouble＋V-ing，不是原形動詞。",re:"Let me move somewhere quieter.",rezh:"我換到安靜一點的地方。"},
+{tab:'toeic',s:9,en:"Can everyone see my screen?",zh:"大家看得到我的畫面嗎？",tip:"[[考點：]] 視訊會議情境近年出題率明顯提高。",re:"Yes, it's showing clearly.",rezh:"有，很清楚。"},
+{tab:'toeic',s:9,en:"Let's wait a moment for the others to join.",zh:"我們等一下其他人加入。",tip:"[[文法考點：]] wait for someone to＋動詞，不定詞用法常考。",re:"Sure, take your time.",rezh:"好啊，慢慢來。"}
 ];
 
 const TABNAME = {social:"日常社交", toeic:"多益商務"};
@@ -503,6 +516,7 @@ const LEAD = {
   <p><b>3. 收尾</b>—— Small Talk 有一半的本事在懂得結束，不是聊到乾掉才走。</p>
 </div>
 <p class="note">記法：<b>觀察 → 追問 → 收尾</b>。只做第一步，就會得到「How are you? / Fine.」然後冷場。</p>
+<p class="note">每句下面的 <b>「對方回」</b>是把對話接下去的另一半。遮起來先猜對方會怎麼答，再點開對照——這比憑空造句快得多，也是真正在練對話，而不是背句子。</p>
 <h2 id="safe-h">七個安全話題，四個地雷區</h2>
 <ul class="mine">
   <li><b>安全：</b>天氣、交通、會場與場地、食物飲料、週末計畫、旅行經驗、工作近況（不含薪資）。</li>
@@ -511,8 +525,9 @@ const LEAD = {
   toeic: `
 <div class="formula">
   <p><b>金色證書門檻：860 分</b>（聽力加閱讀，滿分 990）。級距：金色 860-990、藍色 730-855、綠色 470-725、棕色 220-469。</p>
-  <p><b>練法建議：</b>每天 10 句。先遮住中文自己想一次，再點開對答案，最後按 🔊 聽一遍。三個動作做完，記憶才會留下來。</p>
-  <p><b>怎麼用自測：</b>按上方「👁 自測」，中文與考點會先蓋住，點一下才顯示。</p>
+  <p><b>練法建議：</b>每天 10 句。先遮住中文與「對方回」自己想一次，再點開對答案，最後按 🔊 把一來一往聽完整。三個動作做完，記憶才會留下來。</p>
+  <p><b>怎麼用自測：</b>按上方「👁 自測」，中文、考點與對方回都會先蓋住，點一下才顯示。</p>
+  <p><b>「對方回」怎麼用：</b>每句下面的回應，就是 Part 2 的考法——先問一句，再聽回應。平常就練「這句話對方會怎麼答」，考試時的反應會快很多。</p>
 </div>
 <h2 id="trap-h">多益最常見的四個陷阱</h2>
 <ul class="mine">
@@ -605,6 +620,11 @@ function itemHTML(d){
         <div class="en">${hl(d.en,kw)}</div>
         <div class="zh">${hl(d.zh,kw)}</div>
         ${d.tip?`<div class="tip">${hl(d.tip,kw)}</div>`:''}
+        ${d.re?`<div class="re">
+          <div class="rehead"><span class="relab">對方回</span><button class="say" data-aid="${d.aid}-re" data-en="${esc(d.re)}" title="聽對方怎麼回">🔊</button></div>
+          <div class="reen">${hl(d.re,kw)}</div>
+          <div class="rezh">${hl(d.rezh,kw)}</div>
+        </div>`:''}
       </div>
       <button class="star ${on?'on':''}" data-en="${esc(d.en)}" title="收藏">${on?'★':'☆'}</button>
     </div>
@@ -614,7 +634,7 @@ function itemHTML(d){
 const matches = d => {
   if(onlyFav && !favs.includes(d.en)) return false;
   if(!kw) return true;
-  return (d.en+' '+d.zh+' '+d.tip).toLowerCase().includes(kw.toLowerCase());
+  return (d.en+' '+d.zh+' '+d.tip+' '+(d.re||'')+' '+(d.rezh||'')).toLowerCase().includes(kw.toLowerCase());
 };
 
 function render(){
@@ -706,7 +726,7 @@ quizBtn.onclick=()=>{
 };
 
 function bindItems(){
-  main.querySelectorAll('.say').forEach(b=>{ b.onclick=()=>speak(b.dataset.aid, b.dataset.en, b); });
+  main.querySelectorAll('.say').forEach(b=>{ b.onclick=e=>{ e.stopPropagation(); speak(b.dataset.aid, b.dataset.en, b); }; });
   main.querySelectorAll('.star').forEach(b=>{
     b.onclick=()=>{
       const v=b.dataset.en, i=favs.indexOf(v);
