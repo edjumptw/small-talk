@@ -129,6 +129,17 @@
   }
   body[data-tab="toeic"] .badge{background:var(--tab2-soft);color:var(--tab2);}
 
+  /* 語音與語速 */
+  .vrow{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:10px;padding-top:10px;border-top:1px dashed var(--line);}
+  .vrow label{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:var(--ink-soft);white-space:nowrap;}
+  .vrow select{
+    font:inherit;font-size:12.5px;padding:4px 8px;border-radius:8px;
+    border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;
+  }
+  body[data-tab="toeic"] .vrow select:focus{border-color:var(--tab2);}
+  .vrow select:focus{outline:none;border-color:var(--accent);}
+  .vtip{font-size:11.5px;color:var(--ink-soft);margin-left:auto;}
+
   /* 自測模式 */
   .quiz .txt{cursor:pointer;}
   .quiz .zh, .quiz .tip{filter:blur(6px);user-select:none;transition:filter .18s;}
@@ -197,6 +208,25 @@
     <button class="btn" id="themeBtn">🌙 夜間</button>
     <button class="btn" id="printBtn">列印 / PDF</button>
   </div>
+  <div class="vrow">
+    <label>🔊 語音
+      <select id="voiceSel">
+        <option value="us-f">美式女聲</option>
+        <option value="us-m">美式男聲</option>
+        <option value="uk-f">英式女聲</option>
+      </select>
+    </label>
+    <label>語速
+      <select id="rateSel">
+        <option value="0.7">0.7 倍（慢）</option>
+        <option value="0.85">0.85 倍</option>
+        <option value="1">1 倍（正常）</option>
+        <option value="1.15">1.15 倍</option>
+      </select>
+    </label>
+    <button class="btn" id="tryBtn" title="用目前設定試聽一句">試聽</button>
+    <span class="vtip">點句子左邊的 🔊 即可朗讀</span>
+  </div>
   <div class="chips" id="chips"></div>
 </div>
 
@@ -205,7 +235,8 @@
 
 <footer>
   本網站為學習用途之自製整理，例句為商業與日常英語通用表達，非取自任何特定出版物或題庫。<br>
-  朗讀功能使用瀏覽器內建語音合成，無須連網下載音檔。
+  朗讀使用預先生成的高擬真語音（美式女聲／美式男聲／英式女聲可選），需連網載入音檔；<br>
+  若音檔載入失敗，會自動改用裝置內建語音繼續播放。
 </footer>
 
 </div>
@@ -515,6 +546,9 @@ const TAIL = {
 </div>`
 };
 
+/* 每句指定穩定音檔編號：社交 social-001…100、多益 toeic-001…100 */
+(function(){ const n={}; DATA.forEach(d=>{ n[d.tab]=(n[d.tab]||0)+1; d.aid=d.tab+'-'+String(n[d.tab]).padStart(3,'0'); }); })();
+
 /* ?all=1 → 一次輸出兩區全部內容，供列印／存 PDF 用 */
 const PRINT_ALL = new URLSearchParams(location.search).get('all')==='1';
 const KEY='st-fav-v1', QKEY='st-quiz-v1', TKEY='st-theme-v1';
@@ -566,7 +600,7 @@ function itemHTML(d){
   const on = favs.includes(d.en);
   return `<div class="item">
     <div class="top">
-      <button class="say" data-en="${esc(d.en)}" title="朗讀">🔊</button>
+      <button class="say" data-aid="${d.aid}" data-en="${esc(d.en)}" title="朗讀">🔊</button>
       <div class="txt">
         <div class="en">${hl(d.en,kw)}</div>
         <div class="zh">${hl(d.zh,kw)}</div>
@@ -672,7 +706,7 @@ quizBtn.onclick=()=>{
 };
 
 function bindItems(){
-  main.querySelectorAll('.say').forEach(b=>{ b.onclick=()=>speak(b.dataset.en,b); });
+  main.querySelectorAll('.say').forEach(b=>{ b.onclick=()=>speak(b.dataset.aid, b.dataset.en, b); });
   main.querySelectorAll('.star').forEach(b=>{
     b.onclick=()=>{
       const v=b.dataset.en, i=favs.indexOf(v);
@@ -689,21 +723,63 @@ function bindItems(){
   }
 }
 
-let cur=null;
-function speak(text,btn){
-  if(!('speechSynthesis' in window)){ btn.disabled=true; btn.textContent='✕'; return; }
-  speechSynthesis.cancel();
-  document.querySelectorAll('.say.playing').forEach(x=>{x.classList.remove('playing');x.textContent='🔊';});
-  if(cur===text){ cur=null; return; }
+/* ── 朗讀：播放預先生成的高品質語音檔；載不到才退回裝置內建語音 ── */
+const VKEY='st-voice-v1', RKEY='st-rate-v1';
+let voiceKey='us-f', rate=1;
+try{ const v=localStorage.getItem(VKEY); if(v) voiceKey=v; }catch(e){}
+try{ const r=parseFloat(localStorage.getItem(RKEY)); if(r>0) rate=r; }catch(e){}
+
+const audioEl=new Audio();
+audioEl.preload='none';
+let curBtn=null;
+
+function isSay(b){ return b && b.classList.contains('say'); }
+function resetBtn(b){ if(!b) return; b.classList.remove('playing'); if(isSay(b)) b.textContent='🔊'; }
+function stopPlaying(){
+  try{ audioEl.pause(); }catch(e){}
+  try{ if('speechSynthesis' in window) speechSynthesis.cancel(); }catch(e){}
+  resetBtn(curBtn); curBtn=null;
+}
+
+/* 後備方案：裝置內建語音，並優先挑自然度較高的英語語音 */
+function sayFallback(text,btn){
+  if(!text || !('speechSynthesis' in window)){ btn.disabled=true; btn.textContent='✕'; return; }
   const u=new SpeechSynthesisUtterance(text);
-  u.lang='en-US'; u.rate=.9;
-  u.onstart=()=>{btn.classList.add('playing');btn.textContent='■';};
-  u.onend=()=>{btn.classList.remove('playing');btn.textContent='🔊';cur=null;};
-  u.onerror=()=>{btn.classList.remove('playing');btn.textContent='🔊';cur=null;};
-  cur=text;
+  u.lang='en-US'; u.rate=rate;
+  const vs=(speechSynthesis.getVoices()||[]);
+  const prefer=['Google US English','Google UK English Female','Samantha','Ava','Allison','Serena','Daniel','Karen','Alex'];
+  let pick=null;
+  for(const n of prefer){ pick=vs.find(v=>v.name===n); if(pick) break; }
+  if(!pick) pick=vs.find(v=>v.lang==='en-US')||vs.find(v=>/^en/i.test(v.lang));
+  if(pick) u.voice=pick;
+  curBtn=btn; btn.classList.add('playing'); if(isSay(btn)) btn.textContent='■';
+  const done=()=>{ resetBtn(btn); if(curBtn===btn) curBtn=null; };
+  /* 保險計時器：萬一語音引擎不回報結束，按鈕也不會卡在播放狀態 */
+  const wd=setTimeout(done, Math.min(30000, 1800 + text.length*90));
+  u.onend=()=>{ clearTimeout(wd); done(); };
+  u.onerror=()=>{ clearTimeout(wd); done(); };
   speechSynthesis.speak(u);
 }
-window.addEventListener('beforeunload',()=>{ if('speechSynthesis' in window) speechSynthesis.cancel(); });
+
+function speak(aid,text,btn){
+  if(curBtn===btn){ stopPlaying(); return; }
+  stopPlaying();
+  curBtn=btn; btn.classList.add('playing'); if(isSay(btn)) btn.textContent='■';
+  const done=()=>{ resetBtn(btn); if(curBtn===btn) curBtn=null; };
+  let failed=false;
+  const fail=()=>{ if(failed) return; failed=true; try{ audioEl.pause(); }catch(e){} done(); sayFallback(text,btn); };
+  audioEl.onended=done;
+  audioEl.onerror=fail;
+  audioEl.playbackRate=rate;
+  audioEl.src='audio/'+voiceKey+'/'+aid+'.mp3';
+  const p=audioEl.play();
+  if(p && p.catch) p.catch(fail);
+}
+window.addEventListener('beforeunload',()=>{
+  try{ audioEl.pause(); }catch(e){}
+  try{ if('speechSynthesis' in window) speechSynthesis.cancel(); }catch(e){}
+});
+if('speechSynthesis' in window) speechSynthesis.onvoiceschanged=()=>{};
 
 document.querySelectorAll('.tab').forEach(t=>{
   t.onclick=()=>{
@@ -745,6 +821,29 @@ try{
 }catch(e){}
 
 buildChips(); updateFavBtn(); applyQuiz(); render();
+
+/* 語音與語速選擇 */
+const voiceSel=document.getElementById('voiceSel');
+const rateSel=document.getElementById('rateSel');
+const tryBtn=document.getElementById('tryBtn');
+voiceSel.value=voiceKey; rateSel.value=String(rate);
+voiceSel.onchange=()=>{
+  voiceKey=voiceSel.value;
+  try{ localStorage.setItem(VKEY,voiceKey); }catch(e){}
+  stopPlaying();
+};
+rateSel.onchange=()=>{
+  rate=parseFloat(rateSel.value)||1;
+  try{ localStorage.setItem(RKEY,String(rate)); }catch(e){}
+  audioEl.playbackRate=rate;
+  stopPlaying();
+};
+tryBtn.onclick=()=>{
+  const b=main.querySelector('.say');
+  if(b){ speak(b.dataset.aid, b.dataset.en, tryBtn); return; }
+  const f=DATA.find(d=>d.tab===tab)||DATA[0];
+  speak(f.aid, f.en, tryBtn);
+};
 </script>
 </body>
 </html>
