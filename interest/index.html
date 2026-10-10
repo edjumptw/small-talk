@@ -311,6 +311,7 @@ function showDone(){
   document.body.classList.add('sent');
   document.getElementById('done').classList.add('on');
   document.getElementById('err').classList.remove('on');
+  unlockBtn();
   window.scrollTo({top:0,behavior:'smooth'});
 }
 function unlockBtn(){
