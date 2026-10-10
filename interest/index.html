@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>英語情境練習｜想用的人先留個資料</title>
+<meta name="description" content="200 句真實情境英語，每句都附對方回應、母語者發音與遮蔽自測。目前可免費試用，若做成完整版想先聽你的意見。">
+<meta name="robots" content="noindex">
+<style>
+  :root{
+    --bg:#f7f6f3; --card:#ffffff; --ink:#1f1d1a; --ink-soft:#5c5852;
+    --line:#e5e1da; --accent:#8a5a2b; --accent-soft:#f3e9dd; --en:#1a3a5c;
+    --shadow:0 1px 3px rgba(31,29,26,.07);
+  }
+  html[data-theme="dark"]{
+    --bg:#171614; --card:#242220; --ink:#ece7df; --ink-soft:#a49c92;
+    --line:#38352f; --accent:#c8955a; --accent-soft:#33291d; --en:#8fc0e8;
+    --shadow:0 1px 3px rgba(0,0,0,.4);
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Hiragino Sans GB","Microsoft JhengHei",sans-serif;
+    line-height:1.8;font-size:16px;-webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:680px;margin:0 auto;padding:0 20px 80px;}
+
+  .bar{
+    position:sticky;top:0;z-index:20;background:var(--bg);
+    border-bottom:1px solid var(--line);margin-bottom:0;
+  }
+  .bar-in{max-width:680px;margin:0 auto;padding:10px 20px;display:flex;justify-content:flex-end;}
+  .tbtn{
+    border:1px solid var(--line);background:var(--card);color:var(--ink-soft);
+    border-radius:8px;padding:6px 12px;font-size:13.5px;cursor:pointer;font-family:inherit;
+    transition:.15s;
+  }
+  .tbtn:hover{border-color:var(--accent);color:var(--accent);}
+
+  header{padding:48px 0 8px;}
+  h1{font-size:31px;line-height:1.45;margin:0 0 14px;letter-spacing:.3px;}
+  .lead{font-size:17px;color:var(--ink-soft);margin:0;}
+  .lead b{color:var(--ink);font-weight:600;}
+
+  h2{
+    font-size:20px;margin:52px 0 14px;padding-left:12px;
+    border-left:5px solid var(--accent);
+  }
+
+  ul.pain{list-style:none;padding:0;margin:0;}
+  ul.pain li{
+    background:var(--card);border:1px solid var(--line);border-radius:12px;
+    padding:14px 18px;margin:9px 0;box-shadow:var(--shadow);
+  }
+  ul.pain li b{color:var(--accent);}
+
+  .have{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px 24px;box-shadow:var(--shadow);}
+  .have ul{padding-left:20px;margin:6px 0 0;}
+  .have li{margin:7px 0;}
+  .tag{
+    display:inline-block;background:var(--accent-soft);color:var(--accent);
+    border-radius:999px;padding:3px 12px;font-size:13px;font-weight:600;margin-bottom:10px;
+  }
+
+  .try{
+    display:inline-block;margin-top:18px;background:var(--accent);color:#fff;
+    text-decoration:none;border-radius:10px;padding:13px 26px;font-size:16px;font-weight:600;
+    transition:.15s;
+  }
+  .try:hover{opacity:.88;}
+
+  /* 表單 */
+  .card{
+    background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:26px 26px 28px;box-shadow:var(--shadow);
+  }
+  .q{margin:0 0 26px;}
+  .q:last-of-type{margin-bottom:20px;}
+  .q > label.qt{display:block;font-weight:600;margin-bottom:10px;font-size:15.5px;}
+  .q .hint{display:block;color:var(--ink-soft);font-size:13.5px;font-weight:400;margin-top:3px;}
+  .opts{display:flex;flex-direction:column;gap:8px;}
+  .opt{
+    display:flex;align-items:flex-start;gap:10px;border:1px solid var(--line);
+    border-radius:10px;padding:11px 14px;cursor:pointer;font-size:15px;transition:.15s;
+  }
+  .opt:hover{border-color:var(--accent);}
+  .opt input{margin:5px 0 0;flex:0 0 auto;accent-color:var(--accent);}
+  .opt:has(input:checked){border-color:var(--accent);background:var(--accent-soft);}
+  input[type=email],textarea{
+    width:100%;padding:12px 14px;border-radius:10px;border:1px solid var(--line);
+    background:var(--bg);color:var(--ink);font-size:16px;font-family:inherit;outline:none;
+  }
+  input[type=email]:focus,textarea:focus{border-color:var(--accent);}
+  textarea{resize:vertical;min-height:88px;line-height:1.7;}
+
+  .send{
+    width:100%;border:0;background:var(--accent);color:#fff;border-radius:10px;
+    padding:15px;font-size:16.5px;font-weight:600;cursor:pointer;font-family:inherit;
+    transition:.15s;margin-top:6px;
+  }
+  .send:hover{opacity:.88;}
+  .send:disabled{opacity:.6;cursor:default;}
+
+  .done{
+    display:none;background:var(--accent-soft);border:1px solid var(--accent);
+    border-radius:12px;padding:22px 24px;margin-bottom:22px;
+  }
+  .done.on{display:block;}
+  .done b{color:var(--accent);}
+  body.sent .card{display:none;}
+
+  .privacy{
+    margin-top:34px;background:var(--card);border:1px solid var(--line);
+    border-radius:12px;padding:20px 24px;font-size:13.5px;color:var(--ink-soft);line-height:1.85;
+  }
+  .privacy h3{font-size:14.5px;color:var(--ink);margin:0 0 8px;}
+  .privacy ol{padding-left:20px;margin:0;}
+  .privacy li{margin:4px 0;}
+
+  footer{
+    margin-top:44px;padding-top:20px;border-top:1px solid var(--line);
+    color:var(--ink-soft);font-size:13.5px;
+  }
+  footer a{color:var(--accent);}
+  .hp{position:absolute;left:-9999px;}
+  @media (max-width:520px){
+    h1{font-size:26px;}
+    .card{padding:22px 18px 24px;}
+    .have{padding:18px 18px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <div class="bar-in"><button class="tbtn" id="themeBtn">夜間模式</button></div>
+</div>
+
+<div class="wrap">
+
+<header>
+  <h1>把英語練到「敢開口」</h1>
+  <p class="lead">不是背更多單字，是知道<b>什麼場合該說什麼</b>，還有<b>對方回話之後你怎麼接</b>。</p>
+</header>
+
+<h2>你是不是也這樣</h2>
+<ul class="pain">
+  <li>單字背了不少，真的要用時，話卡在喉嚨<b>講不出來</b>。</li>
+  <li>課本例句太整齊，<b>真實對話根本不是那樣</b>。</li>
+  <li>練了很多「怎麼開頭」，但對方一回話就<b>接不下去</b>。</li>
+  <li>想練，但<b>不知道從哪一句開始</b>，開頭最難。</li>
+</ul>
+
+<h2>現在已經有一份，你可以先用</h2>
+<div class="have">
+  <span class="tag">免費試用中</span>
+  <p style="margin:0 0 4px;">目前做好的是這兩區，共 200 句：</p>
+  <ul>
+    <li><b>日常社交</b> 100 句——見面破冰、飯局、閒聊、收尾</li>
+    <li><b>多益商務</b> 100 句——會議、客戶、出差、訂單、客服、電話</li>
+    <li>每一句都附<b>「對方回」</b>，把對話補成一來一往，不是只給你開場白</li>
+    <li><b>三種口音</b>（美式女聲、美式男聲、英式女聲），語速可以調慢調快</li>
+    <li>可以<b>遮蔽自測</b>——先自己想，點一下才掀開答案</li>
+    <li>可搜尋、可收藏、可列印成 PDF</li>
+  </ul>
+  <a class="try" href="https://edjumptw.github.io/small-talk/">先去試用看看 →</a>
+</div>
+
+<h2>如果做成完整版，你想要什麼</h2>
+<p style="color:var(--ink-soft);font-size:15px;margin:0 0 18px;">
+  填一下，之後推出會第一個通知你。資料只用來跟你聯繫，不會給別人。
+</p>
+
+<div class="done" id="done">
+  <b>收到了，謝謝你。</b><br>
+  之後有進一步的消息，會寄到你留的這個 email。
+</div>
+
+<form class="card" id="form" method="POST"
+      action="https://formsubmit.co/wosiinmo@gmail.com">
+  <!-- FormSubmit 設定 -->
+  <input type="hidden" name="_subject" value="英語練習手冊・意願登記">
+  <input type="hidden" name="_template" value="table">
+  <input type="hidden" name="_captcha" value="false">
+  <input type="hidden" name="_next" value="https://edjumptw.github.io/small-talk/interest/?sent=1">
+  <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off">
+
+  <div class="q">
+    <label class="qt" for="email">你的 email
+      <span class="hint">之後的通知會寄到這裡</span>
+    </label>
+    <input type="email" id="email" name="email" required placeholder="you@example.com">
+  </div>
+
+  <div class="q">
+    <label class="qt">你現在最想解決的是什麼？
+      <span class="hint">選一個最接近的</span>
+    </label>
+    <div class="opts">
+      <label class="opt"><input type="radio" name="purpose" value="敢開口說" required><span>敢開口說，不要每次話到嘴邊又吞回去</span></label>
+      <label class="opt"><input type="radio" name="purpose" value="準備多益或檢定"><span>準備多益或其它英語檢定</span></label>
+      <label class="opt"><input type="radio" name="purpose" value="工作往來"><span>工作需要——開會、回信、跟客戶或同事往來</span></label>
+      <label class="opt"><input type="radio" name="purpose" value="出國旅遊或生活"><span>出國旅遊、生活會用到</span></label>
+      <label class="opt"><input type="radio" name="purpose" value="幫孩子或家人找"><span>幫孩子或家人找練習的素材</span></label>
+    </div>
+  </div>
+
+  <div class="q">
+    <label class="qt">如果推出完整版，你願意付多少？
+      <span class="hint">這題最重要。填你真正會掏錢的數字，不用客氣</span>
+    </label>
+    <div class="opts">
+      <label class="opt"><input type="radio" name="price" value="只想要免費的" required><span>我只想要免費的</span></label>
+      <label class="opt"><input type="radio" name="price" value="300元以下"><span>新台幣 300 元以下</span></label>
+      <label class="opt"><input type="radio" name="price" value="300-600元"><span>新台幣 300～600 元</span></label>
+      <label class="opt"><input type="radio" name="price" value="600-1200元"><span>新台幣 600～1200 元</span></label>
+      <label class="opt"><input type="radio" name="price" value="1200元以上"><span>新台幣 1200 元以上</span></label>
+    </div>
+  </div>
+
+  <div class="q">
+    <label class="qt">最想要哪些？（可多選）
+      <span class="hint">不選也可以</span>
+    </label>
+    <div class="opts">
+      <label class="opt"><input type="checkbox" name="want" value="更多情境"><span>更多情境——職場、面試、旅遊、醫療、租屋之類</span></label>
+      <label class="opt"><input type="checkbox" name="want" value="更難的句子"><span>更難的句子，現在這些對我太簡單</span></label>
+      <label class="opt"><input type="checkbox" name="want" value="真人對話影片"><span>真人對話影片，看嘴型和表情</span></label>
+      <label class="opt"><input type="checkbox" name="want" value="每天推播"><span>每天固定時間推一句到手機（LINE 之類）</span></label>
+      <label class="opt"><input type="checkbox" name="want" value="有人可以對話"><span>有真人或 AI 可以陪我對話練習</span></label>
+      <label class="opt"><input type="checkbox" name="want" value="檢定對應"><span>對應多益分數的練習與模擬題</span></label>
+    </div>
+  </div>
+
+  <div class="q">
+    <label class="qt" for="message">還有什麼想說的？
+      <span class="hint">選填。你想練什麼、卡在哪裡，都歡迎直接寫</span>
+    </label>
+    <textarea id="message" name="message" placeholder="例如：我每次跟外國客戶視訊都會緊張，不知道要聊什麼⋯⋯"></textarea>
+  </div>
+
+  <button class="send" type="submit" id="sendBtn">送出</button>
+</form>
+
+<div class="privacy">
+  <h3>個人資料蒐集告知事項</h3>
+  <ol>
+    <li><b>蒐集者：</b>國際人脈商業有限公司</li>
+    <li><b>蒐集目的：</b>聯繫與了解需求（消費者服務、行銷推廣）。</li>
+    <li><b>個資類別：</b>您填寫的 email 與各題作答內容。</li>
+    <li><b>利用期間：</b>自填寫日起，至您要求刪除為止。</li>
+    <li><b>利用地區：</b>台灣；表單服務商 FormSubmit 之伺服器位於美國，資料傳輸過程會經由該服務。</li>
+    <li><b>利用對象與方式：</b>僅供本公司以電子郵件寄送相關通知，不會提供給其他第三人。</li>
+    <li><b>您的權利：</b>依個人資料保護法第 3 條，您可查詢或請求閱覽、請求製給複製本、請求補充或更正、請求停止蒐集處理利用、請求刪除。來信 <a href="mailto:wosiinmo@gmail.com">wosiinmo@gmail.com</a> 即可辦理。</li>
+    <li><b>不提供的影響：</b>若未提供 email，將無法收到後續通知。</li>
+  </ol>
+</div>
+
+<footer>
+  <p style="margin:0;">目前的練習頁可免費使用：<a href="https://edjumptw.github.io/small-talk/">英語練習手冊</a></p>
+</footer>
+
+</div>
+
+<script>
+/* 主題 */
+const THEME_KEY='st-theme-v1';
+(function(){
+  let t='light';
+  try{ t=localStorage.getItem(THEME_KEY)||'light'; }catch(e){}
+  document.documentElement.setAttribute('data-theme',t);
+})();
+function paintTheme(){
+  const dark=document.documentElement.getAttribute('data-theme')==='dark';
+  document.getElementById('themeBtn').textContent=dark?'日間模式':'夜間模式';
+}
+document.getElementById('themeBtn').onclick=()=>{
+  const now=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';
+  document.documentElement.setAttribute('data-theme',now);
+  try{ localStorage.setItem(THEME_KEY,now); }catch(e){}
+  paintTheme();
+};
+paintTheme();
+
+/* 送出後（FormSubmit 導回 ?sent=1）顯示感謝 */
+if(new URLSearchParams(location.search).get('sent')==='1'){
+  document.body.classList.add('sent');
+  document.getElementById('done').classList.add('on');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* 送出時鎖住按鈕，避免連點 */
+document.getElementById('form').addEventListener('submit',()=>{
+  const b=document.getElementById('sendBtn');
+  b.disabled=true; b.textContent='送出中⋯⋯';
+});
+</script>
+</body>
+</html>
