@@ -108,6 +108,13 @@
   .done.on{display:block;}
   .done b{color:var(--accent);}
   body.sent .card{display:none;}
+  .err{
+    display:none;background:#fdf0ec;border:1px solid #d9917a;color:#7a3520;
+    border-radius:12px;padding:16px 20px;margin-bottom:18px;font-size:14.5px;
+  }
+  html[data-theme="dark"] .err{background:#33201a;border-color:#8a5040;color:#f0bda8;}
+  .err.on{display:block;}
+  .err a{color:inherit;}
 
   .privacy{
     margin-top:34px;background:var(--card);border:1px solid var(--line);
@@ -174,6 +181,11 @@
 <div class="done" id="done">
   <b>收到了，謝謝你。</b><br>
   之後有進一步的消息，會寄到你留的這個 email。
+</div>
+
+<div class="err" id="err">
+  <b>送出時出了點問題。</b>可以再試一次，或直接寄信到
+  <a href="mailto:wosiinmo@gmail.com">wosiinmo@gmail.com</a> 告訴我們你想用。
 </div>
 
 <form class="card" id="form" method="POST"
@@ -289,10 +301,43 @@ if(new URLSearchParams(location.search).get('sent')==='1'){
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
-/* 送出時鎖住按鈕，避免連點 */
-document.getElementById('form').addEventListener('submit',()=>{
-  const b=document.getElementById('sendBtn');
-  b.disabled=true; b.textContent='送出中⋯⋯';
+/* 送出：改用 AJAX，成功就留在本頁顯示感謝，不跳到外部頁面。
+   若瀏覽器環境不支援，才退回原本的表單提交。 */
+const FORM_ENDPOINT='https://formsubmit.co/ajax/wosiinmo@gmail.com';
+const form=document.getElementById('form');
+const sendBtn=document.getElementById('sendBtn');
+
+function showDone(){
+  document.body.classList.add('sent');
+  document.getElementById('done').classList.add('on');
+  document.getElementById('err').classList.remove('on');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function unlockBtn(){
+  sendBtn.disabled=false; sendBtn.textContent='送出';
+}
+
+form.addEventListener('submit', async e=>{
+  e.preventDefault();
+  document.getElementById('err').classList.remove('on');
+  sendBtn.disabled=true; sendBtn.textContent='送出中⋯⋯';
+  try{
+    const res=await fetch(FORM_ENDPOINT,{
+      method:'POST',
+      headers:{'Accept':'application/json'},
+      body:new FormData(form)
+    });
+    if(res.ok){ showDone(); return; }
+    throw new Error('回應 '+res.status);
+  }catch(err){
+    // 連線層級失敗才退回一般提交；有回應但狀態不對就顯示錯誤
+    if(err instanceof TypeError){
+      form.submit(); return;
+    }
+    document.getElementById('err').classList.add('on');
+    unlockBtn();
+    document.getElementById('err').scrollIntoView({behavior:'smooth',block:'center'});
+  }
 });
 </script>
 </body>
